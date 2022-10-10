@@ -1,11 +1,11 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
@@ -18,16 +18,16 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment3.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment3 : Fragment() {
+class HomeIncidents : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    lateinit var vistaFragment3 : View
-    lateinit var btnHomeGoToIndex: Button
+    lateinit var vistaHomeIncidentes : View
+    lateinit var btnLogout: Button
     lateinit var btnHomeGoToIncidente1: Button
     lateinit var btnHomeGoToIncidente2: Button
-    lateinit var btnFloat: com.google.android.material.floatingactionbutton.FloatingActionButton
+    lateinit var btnAlta: com.google.android.material.floatingactionbutton.FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,50 +42,49 @@ class Fragment3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        vistaFragment3 = inflater.inflate(R.layout.fragment_3, container, false)
+        vistaHomeIncidentes = inflater.inflate(R.layout.home_incidents, container, false)
 
-        btnHomeGoToIndex = vistaFragment3.findViewById((R.id.buttonHomeGoToIndex))
-        btnHomeGoToIncidente1 = vistaFragment3.findViewById((R.id.buttonIncidente1))
-        btnHomeGoToIncidente2 = vistaFragment3.findViewById((R.id.buttonIncidente2))
-        btnFloat = vistaFragment3.findViewById((R.id.btnGoToAlta))
+        btnLogout = vistaHomeIncidentes.findViewById((R.id.buttonLogOut))
+        btnHomeGoToIncidente1 = vistaHomeIncidentes.findViewById((R.id.buttonIncidente1))
+        btnHomeGoToIncidente2 = vistaHomeIncidentes.findViewById((R.id.buttonIncidente2))
+        btnAlta = vistaHomeIncidentes.findViewById((R.id.btnGoToAlta))
 
-        return vistaFragment3;
+        return vistaHomeIncidentes;
     }
 
     override fun onStart() {
         super.onStart()
 
 
-        btnHomeGoToIndex.setOnClickListener {
+        btnLogout.setOnClickListener {
 
+            //indexID = "idx" dentro del parentesis
+            var action3 = HomeIncidentsDirections.actionHomeIncidentsToActivityLogin()
 
-            var action3 = Fragment3Directions.actionFragment3ToFragment1(indexID = "idx")
-
-
-            vistaFragment3.findNavController().navigate(action3)
+            vistaHomeIncidentes.findNavController().navigate(action3)
 
         }
 
         btnHomeGoToIncidente1.setOnClickListener{
 
             var textIncidente = btnHomeGoToIncidente1.text.toString()
-            var action4 = Fragment3Directions.actionFragment3ToFragment4(textIncidente)
+            var action4 = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidents(textIncidente)
 
-            vistaFragment3.findNavController().navigate(action4)
+            vistaHomeIncidentes.findNavController().navigate(action4)
         }
 
         btnHomeGoToIncidente2.setOnClickListener{
 
             var textIncidente2 = btnHomeGoToIncidente2.text.toString()
-            var action5 = Fragment3Directions.actionFragment3ToFragment4(textIncidente2)
+            var action5 = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidents(textIncidente2)
 
-            vistaFragment3.findNavController().navigate(action5)
+            vistaHomeIncidentes.findNavController().navigate(action5)
         }
 
-        btnFloat.setOnClickListener{
-            var action6 = Fragment3Directions.actionFragment3ToFragment5(altaID = "alta")
+        btnAlta.setOnClickListener{
+            var action6 = HomeIncidentsDirections.actionHomeIncidentsToAltaIncidents(altaID = "alta")
 
-            vistaFragment3.findNavController().navigate(action6)
+            vistaHomeIncidentes.findNavController().navigate(action6)
         }
 
 
