@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_login"
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.myapplication.Login"
+        android:label="login"
+        tools:layout="@layout/login" >
+        <action
+            android:id="@+id/action_login_to_reset_password"
+            app:destination="@id/reset_password"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="indexID"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_login_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/reset_password"
+        android:name="com.example.myapplication.ResetPassword"
+        android:label="fragment_2"
+        tools:layout="@layout/reset_password" >
+        <argument
+            android:name="programsid"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_reset_password_to_login"
+            app:destination="@id/login"
+            app:popUpTo="@id/reset_password"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.myapplication.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+
+</navigation>

@@ -5,7 +5,7 @@
     android:id="@+id/frameHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment3">
+    tools:context=".HomeIncidents">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.383" />
 
     <Button
-        android:id="@+id/buttonHomeGoToIndex"
+        android:id="@+id/buttonLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LogOut"

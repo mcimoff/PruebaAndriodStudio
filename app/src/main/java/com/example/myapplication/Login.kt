@@ -1,13 +1,12 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.fragment.app.findFragment
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
@@ -17,17 +16,17 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Fragment1.newInstance] factory method to
+ * Use the [Login.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1 : Fragment() {
+class Login : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     lateinit var vistaFragment : View
-    lateinit var btnFragment1IndexGoToPassword: Button
-    lateinit var btnFragment1IndexGoToHome: Button
+    lateinit var btnGoToResetPassword: Button
+    lateinit var btnGoToHomeIncidentes: Button
     lateinit var idEmail: EditText
     lateinit var idPassword : EditText
 
@@ -44,30 +43,30 @@ class Fragment1 : Fragment() {
 
 
 
-        vistaFragment = inflater.inflate(R.layout.fragment_1, container, false)
+        vistaFragment = inflater.inflate(R.layout.login, container, false)
 
-        btnFragment1IndexGoToPassword = vistaFragment.findViewById(R.id.buttonIndexGoToPassword)
-        btnFragment1IndexGoToHome = vistaFragment.findViewById(R.id.buttonIndexGoToHome)
+        btnGoToResetPassword = vistaFragment.findViewById(R.id.buttonIndexGoToPassword)
+        btnGoToHomeIncidentes = vistaFragment.findViewById(R.id.buttonLoginHomeIncidentes)
         idEmail = vistaFragment.findViewById((R.id.idEmail))
         idPassword = vistaFragment.findViewById(R.id.idPassword)
 
-        return vistaFragment;
+        return vistaFragment
     }
 
     override fun onStart() {
         super.onStart()
 
-        btnFragment1IndexGoToPassword.setOnClickListener{
+        btnGoToResetPassword.setOnClickListener{
 
             var idEmail =  idEmail.text.toString()
-            var action = Fragment1Directions.actionFragment1ToFragment2(idEmail)
+            var action = LoginDirections.actionLoginToResetPassword(idEmail)
 
             vistaFragment.findNavController().navigate(action)
         }
 
-        btnFragment1IndexGoToHome.setOnClickListener{
-            var idPassword = idPassword.text.toString()
-            var action2 = Fragment1Directions.actionFragment1ToFragment3(idPassword)
+        btnGoToHomeIncidentes.setOnClickListener{
+            //var idPassword = idPassword.text.toString() - idPassword en los parentesis
+            var action2 = LoginDirections.actionLoginToMainActivity()
 
             vistaFragment.findNavController().navigate(action2)
         }

@@ -5,7 +5,7 @@
     android:id="@+id/frameIndex"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment1">
+    tools:context=".Login">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -98,7 +98,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/buttonIndexGoToHome"
+        android:id="@+id/buttonLoginHomeIncidentes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ingresar"
