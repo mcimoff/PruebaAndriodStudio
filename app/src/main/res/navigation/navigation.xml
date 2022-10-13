@@ -3,90 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/fragment1">
+    app:startDestination="@id/home_incidents">
+    <!-- Login=Login - ResetPassword=OlvidarContrasena - Fragment3=Home_Incidentes - DescripIncidents=DescripIncidente - Alta=Alta -->
     <fragment
-        android:id="@+id/fragment1"
-        android:name="com.example.myapplication.Fragment1"
-        android:label="fragment_1"
-        tools:layout="@layout/fragment_1" >
-        <action
-            android:id="@+id/action_fragment1_to_fragment2"
-            app:destination="@id/fragment2"
-            app:popUpTo="@id/fragment1"
-            app:popUpToInclusive="true" />
-        <argument
-            android:name="indexID"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_fragment1_to_fragment3"
-            app:destination="@id/fragment3"
-            app:popUpTo="@id/fragment1"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="com.example.myapplication.Fragment2"
-        android:label="fragment_2"
-        tools:layout="@layout/fragment_2" >
-        <argument
-            android:name="programsid"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_fragment2_to_fragment1"
-            app:destination="@id/fragment1"
-            app:popUpTo="@id/fragment2"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment3"
-        android:name="com.example.myapplication.Fragment3"
-        android:label="fragment_3"
-        tools:layout="@layout/fragment_3" >
+        android:id="@+id/home_incidents"
+        android:name="com.example.myapplication.HomeIncidents"
+        android:label="home_incidents"
+        tools:layout="@layout/home_incidents" >
         <argument
             android:name="contenidoID"
             app:argType="string" />
         <action
-            android:id="@+id/action_fragment3_to_fragment1"
-            app:destination="@id/fragment1"
-            app:popUpTo="@id/fragment3"
+            android:id="@+id/action_home_incidents_to_activity_login"
+            app:destination="@id/activity_login"
+            app:popUpTo="@id/home_incidents"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_fragment3_to_fragment4"
-            app:destination="@id/fragment4"
-            app:popUpTo="@id/fragment3"
+            android:id="@+id/action_home_incidents_to_descrip_incidents"
+            app:destination="@id/descrip_incidents"
+            app:popUpTo="@id/home_incidents"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_fragment3_to_fragment5"
-            app:destination="@id/fragment5"
-            app:popUpTo="@id/fragment3"
+            android:id="@+id/action_home_incidents_to_alta_incidents"
+            app:destination="@id/alta_incidents"
+            app:popUpTo="@id/home_incidents"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/fragment4"
-        android:name="com.example.myapplication.Fragment4"
-        android:label="fragment_4"
-        tools:layout="@layout/fragment_4" >
+        android:id="@+id/descrip_incidents"
+        android:name="com.example.myapplication.DescripIncidents"
+        android:label="descrip_incidents"
+        tools:layout="@layout/descrip_incidents" >
         <action
-            android:id="@+id/action_fragment4_to_fragment3"
-            app:destination="@id/fragment3"
-            app:popUpTo="@id/fragment4"
+            android:id="@+id/action_descrip_incidents_to_home_incidents"
+            app:destination="@id/home_incidents"
+            app:popUpTo="@id/descrip_incidents"
             app:popUpToInclusive="true" />
         <argument
             android:name="incidenteID"
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/fragment5"
-        android:name="com.example.myapplication.Fragment5"
-        android:label="fragment_5"
-        tools:layout="@layout/fragment_5" >
+        android:id="@+id/alta_incidents"
+        android:name="com.example.myapplication.Alta"
+        android:label="alta_incidents"
+        tools:layout="@layout/alta_incidents" >
         <argument
             android:name="altaID"
             app:argType="string" />
         <action
-            android:id="@+id/action_fragment5_to_fragment3"
-            app:destination="@id/fragment3"
-            app:popUpTo="@id/fragment5"
+            android:id="@+id/action_alta_incidents_to_home_incidents"
+            app:destination="@id/home_incidents"
+            app:popUpTo="@id/alta_incidents"
             app:popUpToInclusive="true" />
     </fragment>
+    <activity
+        android:id="@+id/activity_login"
+        android:name="com.example.myapplication.ActivityLogin"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/busquedaIncidentes"
+        android:name="com.example.myapplication.BusquedaIncidentes"
+        android:label="busqueda_incidentes"
+        tools:layout="@layout/busqueda_incidentes" />
+    <fragment
+        android:id="@+id/historial"
+        android:name="com.example.myapplication.Historial"
+        android:label="fragment_historial"
+        tools:layout="@layout/fragment_historial" />
+    <fragment
+        android:id="@+id/perfil"
+        android:name="com.example.myapplication.Perfil"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
 </navigation>
