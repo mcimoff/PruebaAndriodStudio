@@ -1,21 +1,19 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Perfil.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Perfil : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -23,10 +21,7 @@ class Perfil : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -39,5 +34,17 @@ class Perfil : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        Log.d("Preferencias", prefs.getBoolean("night_mode", false).toString() + " - night mode")
+        Log.d("Preferencias", prefs.getString("edit_email", "email default") + " - edit email")
+    }
+
+    class SettingsFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.user_preferences, rootKey)
+        }
+
     }
 }

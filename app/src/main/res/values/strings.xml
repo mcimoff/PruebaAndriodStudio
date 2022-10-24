@@ -2,5 +2,10 @@
     <string name="app_name">APP INCIDENTES</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="listArrayUserPreferences">
+        <item>Casa</item>
+        <item>Oficina Av. Libertador</item>
+    </string-array>
 </resources>
 
