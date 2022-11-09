@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +29,8 @@ class HomeIncidents : Fragment() {
     lateinit var btnLogout: Button
     lateinit var btnHomeGoToIncidente1: Button
     lateinit var btnHomeGoToIncidente2: Button
+    lateinit var receptorTV: TextView
+    lateinit var providerTV: TextView
     lateinit var btnAlta: com.google.android.material.floatingactionbutton.FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +39,10 @@ class HomeIncidents : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        /*val bundle: Bundle? = Intent.get
+
+        setup()*/
     }
 
     override fun onCreateView(
@@ -56,8 +64,18 @@ class HomeIncidents : Fragment() {
         super.onStart()
 
 
-        btnLogout.setOnClickListener {
+        /*btnLogout.setOnClickListener {
 
+            //indexID = "idx" dentro del parentesis
+            var action3 = HomeIncidentsDirections.actionHomeIncidentsToActivityLogin()
+
+            vistaHomeIncidentes.findNavController().navigate(action3)
+
+        }*/
+
+        btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            //onBackPressed()
             //indexID = "idx" dentro del parentesis
             var action3 = HomeIncidentsDirections.actionHomeIncidentsToActivityLogin()
 

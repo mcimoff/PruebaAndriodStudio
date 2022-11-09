@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,7 +52,7 @@ class ResetPassword : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        var programsid = ResetPasswordArgs.fromBundle(requireArguments()).programsid
+        /*var programsid = ResetPasswordArgs.fromBundle(requireArguments()).programsid
 
         if (programsid != ""){
             title.text = programsid
@@ -69,7 +68,7 @@ class ResetPassword : Fragment() {
 
             vistaFragmentResetPassword.findNavController().navigate(action)
 
-        }
+        }*/
 
 
 
