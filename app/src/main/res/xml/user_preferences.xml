@@ -17,8 +17,8 @@
             android:key="edit_password"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:summary="********"
-            android:title="Contraseña"
+            android:summary="Escribí tu nueva contraseña para cambiarla"
+            android:title="Cambiar Contraseña"
             android:visibility="visible"
             tools:visibility="visible" />
     </PreferenceCategory>
