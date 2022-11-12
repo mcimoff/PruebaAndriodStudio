@@ -77,4 +77,19 @@
         android:name="com.example.myapplication.Perfil"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/item_incidente"
+        android:name="com.example.myapplication.item_incidente"
+        android:label="item_incidente"
+        tools:layout="@layout/fragment_item_incidente"
+        >
+        <action
+            android:id="@+id/action_item_incidente_to_descrip_incidents"
+            app:destination="@id/descrip_incidents"
+            app:popUpTo="@id/home_incidents"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="itemId"
+            app:argType="string" />
+    </fragment>
 </navigation>

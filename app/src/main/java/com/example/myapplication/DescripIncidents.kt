@@ -8,6 +8,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.myapplication.Api.Model.Model
+import com.example.myapplication.Interface.JsonApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +24,8 @@ private const val ARG_PARAM2 = "param2"
       lateinit var vistaDescripIncidentes : View
       lateinit var btnHomeGoToHome: Button
       lateinit var titleIncidente: TextView
+
+
 /**
  * A simple [Fragment] subclass.
  * Use the [DescripIncidents.newInstance] factory method to
@@ -33,6 +42,8 @@ class DescripIncidents : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -57,6 +68,8 @@ class DescripIncidents : Fragment() {
 
         var incidenteText = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteID
 
+
+
         titleIncidente.text = incidenteText
 
         btnHomeGoToHome.setOnClickListener{
@@ -67,5 +80,7 @@ class DescripIncidents : Fragment() {
             vistaDescripIncidentes.findNavController().navigate(action6)
         }
     }
+
+
 
 }
