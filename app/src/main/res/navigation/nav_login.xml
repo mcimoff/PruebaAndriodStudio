@@ -21,7 +21,9 @@
         <action
             android:id="@+id/action_login_to_mainActivity"
             app:destination="@id/mainActivity"
+
             app:popUpTo="@id/login"
+
             app:popUpToInclusive="true" />
     </fragment>
     <!--<fragment
