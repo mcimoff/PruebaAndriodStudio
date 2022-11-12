@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -25,6 +26,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import java.util.logging.Level.INFO
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,6 +49,12 @@ class HomeIncidents : Fragment() {
 
     lateinit var vistaHomeIncidentes : View
     lateinit var btnLogout: Button
+
+    lateinit var btnHomeGoToIncidente1: Button
+    lateinit var btnHomeGoToIncidente2: Button
+    lateinit var receptorTV: TextView
+    lateinit var providerTV: TextView
+
     lateinit var btnAlta: com.google.android.material.floatingactionbutton.FloatingActionButton
      var incidents : MutableList<IncidentesResponse> = mutableListOf()
     lateinit var listIncidentes: RecyclerView
@@ -62,6 +74,9 @@ class HomeIncidents : Fragment() {
         }
 
 
+        /*val bundle: Bundle? = Intent.get
+
+        setup()*/
 
     }
 
@@ -94,8 +109,18 @@ class HomeIncidents : Fragment() {
         super.onStart()
 
 
-        btnLogout.setOnClickListener {
+        /*btnLogout.setOnClickListener {
 
+            //indexID = "idx" dentro del parentesis
+            var action3 = HomeIncidentsDirections.actionHomeIncidentsToActivityLogin()
+
+            vistaHomeIncidentes.findNavController().navigate(action3)
+
+        }*/
+
+        btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            //onBackPressed()
             //indexID = "idx" dentro del parentesis
             var action3 = HomeIncidentsDirections.actionHomeIncidentsToActivityLogin()
 

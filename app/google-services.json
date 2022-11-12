@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "717344491426",
+    "project_id": "gestiondeincidentes-7cfc8",
+    "storage_bucket": "gestiondeincidentes-7cfc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717344491426:android:55ebc019b25737fb4d94fb",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717344491426-96q5sn9ul9o4fl033kng4fqo9o10668d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDka6s6CVNbvp6EPAZb4p7wUOS7VvVJ3F0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717344491426-96q5sn9ul9o4fl033kng4fqo9o10668d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
