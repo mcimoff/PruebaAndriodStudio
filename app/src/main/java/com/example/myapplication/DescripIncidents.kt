@@ -24,6 +24,8 @@ private const val ARG_PARAM2 = "param2"
       lateinit var vistaDescripIncidentes : View
       lateinit var btnHomeGoToHome: Button
       lateinit var titleIncidente: TextView
+      lateinit var dato2: TextView
+      lateinit var dato3: TextView
 
 
 /**
@@ -56,6 +58,9 @@ class DescripIncidents : Fragment() {
 
         titleIncidente = vistaDescripIncidentes.findViewById(R.id.textIncidente)
 
+        dato2 = vistaDescripIncidentes.findViewById(R.id.textIncidente2)
+
+        dato3 = vistaDescripIncidentes.findViewById(R.id.textIncidente3)
 
 
         return vistaDescripIncidentes
@@ -66,11 +71,17 @@ class DescripIncidents : Fragment() {
 
         //var programsid = Fragment2Args.fromBundle(requireArguments()).programsid
 
-        var incidenteText = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteID
+        var incidenteText = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.titulo
 
+        var incidentsText2 = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.descripcionUsuario
 
+        var incidentsText3 = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject._id
 
         titleIncidente.text = incidenteText
+
+        dato2.text = incidentsText2
+
+        dato3.text = incidentsText3.toString()
 
         btnHomeGoToHome.setOnClickListener{
 

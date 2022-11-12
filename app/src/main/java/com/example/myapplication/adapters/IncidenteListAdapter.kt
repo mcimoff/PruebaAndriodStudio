@@ -24,7 +24,7 @@ class IncidenteListAdapter(
 
     override fun onBindViewHolder(holder: IncidenteHolder, position: Int) {
         holder.setName(incidenteList[position].titulo)
-        holder.redirection()
+        holder.redirection(incidenteList[position])
 
 
 
