@@ -10,9 +10,6 @@
         android:name="com.example.myapplication.HomeIncidents"
         android:label="home_incidents"
         tools:layout="@layout/home_incidents" >
-        <argument
-            android:name="contenidoID"
-            app:argType="string" />
         <action
             android:id="@+id/action_home_incidents_to_activity_login"
             app:destination="@id/activity_login"
@@ -28,6 +25,9 @@
             app:destination="@id/alta_incidents"
             app:popUpTo="@id/home_incidents"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="contenidoID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/descrip_incidents"
@@ -40,8 +40,8 @@
             app:popUpTo="@id/descrip_incidents"
             app:popUpToInclusive="true" />
         <argument
-            android:name="incidenteID"
-            app:argType="string" />
+            android:name="incidenteObject"
+            app:argType="com.example.myapplication.Api.Model.IncidentesResponse" />
     </fragment>
     <fragment
         android:id="@+id/alta_incidents"

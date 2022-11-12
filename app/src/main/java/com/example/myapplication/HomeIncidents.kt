@@ -27,7 +27,6 @@ import retrofit2.Response
 import java.util.*
 import java.util.logging.Level.INFO
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 
@@ -60,7 +59,7 @@ class HomeIncidents : Fragment() {
     lateinit var listIncidentes: RecyclerView
     lateinit var incidenteListAdapter: IncidenteListAdapter
     lateinit var  linearLayoutManager: LinearLayoutManager;
-    val baseURL = "http://localhost:3000/"
+    val baseURL = "http://127.0.0.1:3000/"
     val api = Model.create(baseURL)
 
 
@@ -91,16 +90,7 @@ class HomeIncidents : Fragment() {
         btnAlta = vistaHomeIncidentes.findViewById((R.id.btnGoToAlta))
         listIncidentes = vistaHomeIncidentes.findViewById((R.id.recicleViewIncidentes))
         listIncidentes.setHasFixedSize(true)
-        linearLayoutManager = LinearLayoutManager(context)
 
-        listIncidentes.layoutManager = linearLayoutManager
-
-        incidenteListAdapter = IncidenteListAdapter(incidents) { x ->
-            onItemClick(x)
-
-        }
-
-        listIncidentes.adapter = incidenteListAdapter
 
         return vistaHomeIncidentes;
     }
@@ -109,6 +99,10 @@ class HomeIncidents : Fragment() {
         super.onStart()
 
 
+        for(i in 1..5){
+            incidents.add(IncidentesResponse(1,"Error compu","Carlos"))
+            incidents.add(IncidentesResponse(1,"Error Impresora","Luis"))
+        }
         /*btnLogout.setOnClickListener {
 
             //indexID = "idx" dentro del parentesis
@@ -144,14 +138,34 @@ class HomeIncidents : Fragment() {
                ){
                    if (response.isSuccessful){
                        val response: IncidentesResponse? =(response.body())!!
-                       val incidentes: MutableList<IncidentesResponse>? = (response?.titulo as List<IncidentesResponse>).toMutableList()
-                       val titulos = arrayOfNulls<String>(size = incidentes?.size ?:0)
+                       val incidentes: MutableList<IncidentesResponse>? = (response as List<IncidentesResponse>).toMutableList()
+
+                       try {
+                           incidentes
+                       } catch (e : Exception){
+                           e.printStackTrace()
+                       }
+
+                       val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
+
+
+
 
 
                       if(incidentes != null){
 
-                              incidenteListAdapter.setData(incidentes)
-                              listIncidentes.adapter = incidenteListAdapter
+
+                          linearLayoutManager = LinearLayoutManager(context)
+
+                          listIncidentes.layoutManager = linearLayoutManager
+
+                          incidenteListAdapter = IncidenteListAdapter(incidentes) { x ->
+                              onItemClick(x)
+
+                          }
+
+                          listIncidentes.adapter = incidenteListAdapter
+
                       }
 
                    }
@@ -160,6 +174,7 @@ class HomeIncidents : Fragment() {
 
                override fun onFailure(call: Call<IncidentesResponse?>, t: Throwable) {
                   // TODO("Not yet implemented")
+                   call.toString()
                }
 
 

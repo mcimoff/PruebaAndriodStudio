@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Api.Model.IncidentesResponse
+import com.example.myapplication.Entities.Incidente
 import com.example.myapplication.HomeIncidentsDirections
 import com.example.myapplication.R
 import java.text.FieldPosition
@@ -27,14 +29,15 @@ class IncidenteHolder(v: View): RecyclerView.ViewHolder(v) {
     }
 
 
+
     fun getCardLayout (): CardView{
         return view.findViewById(R.id.card_package_item)
     }
 
-    fun redirection (){
+    fun redirection (incidente: IncidentesResponse){
         btnDescrip.setOnClickListener {
             val txt: TextView = view.findViewById(R.id.text_name_item)
-            var action = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidents(txt.text.toString())
+            var action = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidents(incidente)
 
             view.findNavController().navigate(action)
         }
