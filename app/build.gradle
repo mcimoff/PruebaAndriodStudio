@@ -41,6 +41,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     namespace 'com.example.myapplication'
 
 }
@@ -67,9 +71,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-//ViewModel
+//LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1"
+//ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+// Fragment
+    implementation "androidx.fragment:fragment-ktx:1.5.4"
+// Activity
+    //implementation "androidx.activity:activity-ktx:1.6.1"
 
 
 

@@ -140,6 +140,8 @@ class HomeIncidents : Fragment() {
                        val response: IncidentesResponse? =(response.body())!!
                        val incidentes: MutableList<IncidentesResponse>? = (response as List<IncidentesResponse>).toMutableList()
 
+                       btnLogout.text = response.titulo
+
                        try {
                            incidentes
                        } catch (e : Exception){
@@ -155,16 +157,7 @@ class HomeIncidents : Fragment() {
                       if(incidentes != null){
 
 
-                          linearLayoutManager = LinearLayoutManager(context)
 
-                          listIncidentes.layoutManager = linearLayoutManager
-
-                          incidenteListAdapter = IncidenteListAdapter(incidentes) { x ->
-                              onItemClick(x)
-
-                          }
-
-                          listIncidentes.adapter = incidenteListAdapter
 
                       }
 
@@ -182,6 +175,16 @@ class HomeIncidents : Fragment() {
            }
            )
 
+        linearLayoutManager = LinearLayoutManager(context)
+
+        listIncidentes.layoutManager = linearLayoutManager
+
+        incidenteListAdapter = IncidenteListAdapter(incidents) { x ->
+            onItemClick(x)
+
+        }
+
+        listIncidentes.adapter = incidenteListAdapter
 
 
     }
