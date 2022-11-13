@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#039BE5</color>
     <color name="colorPrimaryDark">#2C384A</color>
+    <color name="colorgreenA400">#76FF03</color>
+    <color name="colorTealA300">#26A69A</color>
+    <color name="colorOrangeA500">#FF9800</color>
 </resources>
