@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
 
-    <androidx.fragment.app.FragmentContainerView
+    <!--<androidx.fragment.app.FragmentContainerView
         android:id="@+id/activity_settings"
         android:name="com.example.myapplication.Perfil"
         android:layout_width="396dp"
@@ -27,7 +27,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout="@layout/busqueda_incidentes" /> <!--Se pone cualquier layout-->
+        tools:layout="@layout/busqueda_incidentes" /> --><!--Se pone cualquier layout-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/receptorTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/providerTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="" />
+
+        <Button
+            android:id="@+id/buttonAjustes"
+            style="@android:style/Widget.Material.Light.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajustes"
+            android:textColor="@color/black"
+            app:icon="@drawable/ic_settings"
+            app:iconTint="@color/black"
+            tools:layout_editor_absoluteX="271dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView6"

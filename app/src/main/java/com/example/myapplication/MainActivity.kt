@@ -8,15 +8,14 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 enum class ProviderType {
-    BASIC
+    BASIC,
+    ADMIN
 }
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navHostFragment: NavHostFragment
-    lateinit var receptorTV: TextView
-    lateinit var providerTV: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,23 +25,15 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
-
-        val bundle: Bundle? = intent.extras
-        val email = bundle?.getString("email")
-        val provider = bundle?.getString("provider")
-        setup(email ?:"", provider ?: "")
         
         //val bottomNav = findViewById<BottomNavigationView>(id.bottomNavigationView)
     }
-    private fun setup(email: String, provider: String) {
-        title = "Inicio"
-
-        receptorTV = this.findViewById(R.id.receptorTextView)
-        providerTV = this.findViewById(R.id.providerTextView)
-
-        receptorTV.text = email
-        providerTV.text = provider
-
-
+    fun getEmail(): String? {
+        val bundle: Bundle? = intent.extras
+        return bundle?.getString("email")
+    }
+    fun getTipoUsuario(): String? {
+        val bundle: Bundle? = intent.extras
+        return bundle?.getString("provider")
     }
 }

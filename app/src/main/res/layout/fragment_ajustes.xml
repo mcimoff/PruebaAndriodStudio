@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.Ajustes">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/buttonVolverAjustes"
+        style="@android:style/Widget.Material.Light.Button.Borderless"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/activity_settings"
+        android:name="com.example.myapplication.fragments.Ajustes$SettingsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout="@layout/busqueda_incidentes" /> <!--Se pone cualquier layout-->
+
+</FrameLayout>
