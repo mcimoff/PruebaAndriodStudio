@@ -1,33 +1,26 @@
 package com.example.myapplication
 
-import android.content.Context
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.INFO
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Api.Model.IncidentesResponse
 import com.example.myapplication.Api.Model.Model
-import com.example.myapplication.Entities.Incidente
 import com.example.myapplication.adapters.IncidenteListAdapter
 import com.google.android.material.snackbar.Snackbar
-import okhttp3.internal.platform.Platform.INFO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import java.util.logging.Level.INFO
 import android.widget.TextView
-import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -54,13 +47,13 @@ class HomeIncidents : Fragment() {
     lateinit var receptorTV: TextView
     lateinit var providerTV: TextView
 
+
     lateinit var btnAlta: com.google.android.material.floatingactionbutton.FloatingActionButton
      var incidents : MutableList<IncidentesResponse> = mutableListOf()
     lateinit var listIncidentes: RecyclerView
     lateinit var incidenteListAdapter: IncidenteListAdapter
     lateinit var  linearLayoutManager: LinearLayoutManager;
-    val baseURL = "http://127.0.0.1:3000/"
-    val api = Model.create(baseURL)
+    val api = Model.create()
 
 
 
@@ -71,6 +64,7 @@ class HomeIncidents : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
 
 
         /*val bundle: Bundle? = Intent.get
@@ -136,17 +130,15 @@ class HomeIncidents : Fragment() {
                    call: Call<IncidentesResponse?>,
                    response: Response<IncidentesResponse?>
                ){
-                   if (response.isSuccessful){
-                       val response: IncidentesResponse? =(response.body())!!
-                       val incidentes: MutableList<IncidentesResponse>? = (response as List<IncidentesResponse>).toMutableList()
+                   if (response.code() == 200){
+                       val response: IncidentesResponse? =(response.body() as IncidentesResponse)!!
 
-                       btnLogout.text = response.titulo
 
-                       try {
-                           incidentes
-                       } catch (e : Exception){
-                           e.printStackTrace()
-                       }
+                       val incidentes = (response as List<IncidentesResponse>).toMutableList()
+                       Log.i(TAG, "Llego: $incidentes")
+                       btnLogout.text = incidents.toString()
+
+
 
                        val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
 
@@ -154,9 +146,15 @@ class HomeIncidents : Fragment() {
 
 
 
-                      if(incidentes != null){
+                      if(incidents != null){
 
+                          linearLayoutManager = LinearLayoutManager(context)
 
+                          listIncidentes.layoutManager = linearLayoutManager
+
+                          incidenteListAdapter = IncidenteListAdapter(incidentes)
+
+                          listIncidentes.adapter = incidenteListAdapter
 
 
                       }
@@ -175,16 +173,7 @@ class HomeIncidents : Fragment() {
            }
            )
 
-        linearLayoutManager = LinearLayoutManager(context)
 
-        listIncidentes.layoutManager = linearLayoutManager
-
-        incidenteListAdapter = IncidenteListAdapter(incidents) { x ->
-            onItemClick(x)
-
-        }
-
-        listIncidentes.adapter = incidenteListAdapter
 
 
     }

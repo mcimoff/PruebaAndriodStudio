@@ -13,8 +13,7 @@ import com.example.myapplication.holders.IncidenteHolder
 import com.example.myapplication.item_incidenteDirections
 
 class IncidenteListAdapter(
-    private var incidenteList: MutableList<IncidentesResponse>,
-    val onItemClick: (Int) -> Boolean
+    private var incidenteList: MutableList<IncidentesResponse>
 ): RecyclerView.Adapter<IncidenteHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IncidenteHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_item_incidente,parent,false)

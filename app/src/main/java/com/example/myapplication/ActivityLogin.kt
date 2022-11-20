@@ -20,6 +20,7 @@ class ActivityLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
         //Analytics
         val analytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
