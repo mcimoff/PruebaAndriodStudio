@@ -7,7 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <!--<androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_login"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_login" />-->
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -22,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/idEmail"
+            android:id="@+id/idEmailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -31,7 +42,7 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/idPassword"
+            android:id="@+id/idPasswordText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -45,14 +56,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/loginButton"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/logeoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:text="Ingresar"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 tools:ignore="TextContrastCheck" />
 
             <Space
@@ -62,29 +72,28 @@
                 tools:layout_editor_absoluteY="311dp" />
 
             <Button
-                android:id="@+id/registroButton"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/signUpButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
                 android:text="Registrarse"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/white"
                 tools:ignore="TextContrastCheck" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/buttonIndexGoToPassword"
+        android:id="@+id/buttonGoToResetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="188dp"
         android:text="Olvidé mi contraseña"
         android:textColor="#1DE9B6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textIndex1"

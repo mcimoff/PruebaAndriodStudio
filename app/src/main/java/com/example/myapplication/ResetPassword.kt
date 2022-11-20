@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.reset_password.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,14 +29,12 @@ class ResetPassword : Fragment() {
 
     lateinit var vistaFragmentResetPassword : View
     lateinit var btnGoToLogin: Button
+    lateinit var btnSubmit: Button
     lateinit var title: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -42,25 +44,49 @@ class ResetPassword : Fragment() {
         // Inflate the layout for this fragment
         vistaFragmentResetPassword = inflater.inflate(R.layout.reset_password, container, false)
 
-        btnGoToLogin = vistaFragmentResetPassword.findViewById((R.id.buttonGoToLogin))
-        title = vistaFragmentResetPassword.findViewById(R.id.textPasword1)
-
+        btnGoToLogin = vistaFragmentResetPassword.findViewById((R.id.buttonVolverToLogin))
+        btnSubmit = vistaFragmentResetPassword.findViewById((R.id.btn_submit))
 
         return vistaFragmentResetPassword;
     }
 
     override fun onStart() {
         super.onStart()
+        btnSubmit.setOnClickListener {
+            // Get the email id from the input field.
+            val email: String = et_forgot_email.text.toString().trim { it <= ' ' }
 
-        /*var programsid = ResetPasswordArgs.fromBundle(requireArguments()).programsid
+            // Now, If the email entered in blank then show the error message or else continue with the implemented feature.
+            if (email.isEmpty()) {
+                Toast.makeText(
+                    activity,
+                    "Por favor, ingresa tu email.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                // This piece of code is used to send the reset password link to the user's email id if the user is registered.
+                FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
 
-        if (programsid != ""){
-            title.text = programsid
-        } else{
-            title.text = "Usuario"
+                        if (task.isSuccessful) {
+                            // Show the toast message and finish the forgot password activity to go back to the login screen.
+                            Toast.makeText(
+                                activity,
+                                "El correo para reestablecer tu contraseña fue enviado.",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                            activity?.finish()
+                        } else {
+                            Toast.makeText(
+                                activity,
+                                task.exception!!.message.toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+            }
         }
-
-
 
         btnGoToLogin.setOnClickListener{
 
@@ -68,31 +94,6 @@ class ResetPassword : Fragment() {
 
             vistaFragmentResetPassword.findNavController().navigate(action)
 
-        }*/
-
-
-
-
-
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResetPassword.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ResetPassword().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        }
     }
 }

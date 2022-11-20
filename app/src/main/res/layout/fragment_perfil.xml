@@ -65,7 +65,8 @@
             app:icon="@drawable/ic_settings"
             app:iconTint="@color/black"
             tools:layout_editor_absoluteX="271dp"
-            tools:layout_editor_absoluteY="16dp" />
+            tools:layout_editor_absoluteY="16dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <TextView

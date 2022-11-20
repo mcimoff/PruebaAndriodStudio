@@ -18,7 +18,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activity_settings"
-        android:name="com.example.myapplication.fragments.Ajustes$SettingsFragment"
+        android:name="com.example.myapplication.activities.SettingsActivity$SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"

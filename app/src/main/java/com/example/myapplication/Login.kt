@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth.getInstance
+import androidx.navigation.findNavController
+import com.example.myapplication.fragments.AjustesDirections
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,8 +38,8 @@ class Login : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Setup
-        setup()
+        (activity as ActivityLogin?)!!.startFirebaseAnalyticsInstance()
+
     }
 
     override fun onCreateView(
@@ -49,65 +51,51 @@ class Login : Fragment() {
         vistaFragment = inflater.inflate(R.layout.login, container, false)
 
 
-        btnLogin = vistaFragment.findViewById(R.id.loginButton)
-        btnRegistrarse = vistaFragment.findViewById(R.id.registroButton)
+        btnLogin = vistaFragment.findViewById(R.id.logeoButton)
+        btnRegistrarse = vistaFragment.findViewById(R.id.signUpButton)
 
-        btnGoToResetPassword = vistaFragment.findViewById(R.id.buttonIndexGoToPassword)
+        btnGoToResetPassword = vistaFragment.findViewById(R.id.buttonGoToResetPassword)
 
-        idEmail = vistaFragment.findViewById((R.id.idEmail))
-        idPassword = vistaFragment.findViewById(R.id.idPassword)
+        idEmail = vistaFragment.findViewById((R.id.idEmailText))
+        idPassword = vistaFragment.findViewById(R.id.idPasswordText)
+
+        setup()
 
         return vistaFragment
     }
 
-    /*override fun onStart() {
-        super.onStart()
-
-        btnGoToResetPassword.setOnClickListener{
-
-            var idEmail =  idEmail.text.toString()
-            var action = LoginDirections.actionLoginToResetPassword(idEmail)
-
-            vistaFragment.findNavController().navigate(action)
-        }
-
-        btnLogin.setOnClickListener{
-            //var idPassword = idPassword.text.toString() - idPassword en los parentesis
-            var action2 = LoginDirections.actionLoginToMainActivity()
-
-            vistaFragment.findNavController().navigate(action2)
-        }
-
-    }*/
-
-    private fun showAlert() {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error autenticando al usuario")
-        builder.setPositiveButton("Aceptar", null)
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun showHome(email: String, provider: ProviderType) {
-        val homeIntent = Intent(this.context, MainActivity::class.java).apply {
-            putExtra("email", email)
-            putExtra("provider", provider.name)
-        }
-        this.startActivity(homeIntent)
-    }
-
+//    override fun onStart() {
+//        super.onStart()
+//
+//        btnGoToResetPassword.setOnClickListener{
+//
+//            var idEmail =  idEmail.text.toString()
+//            var action = LoginDirections.actionLoginToResetPassword(idEmail)
+//
+//            vistaFragment.findNavController().navigate(action)
+//        }
+//
+//        btnLogin.setOnClickListener{
+//            //var idPassword = idPassword.text.toString() - idPassword en los parentesis
+//            var action2 = LoginDirections.actionLoginToMainActivity()
+//
+//            vistaFragment.findNavController().navigate(action2)
+//        }
+//
+//    }
     private fun setup() {
+        val activityLogin = (activity as ActivityLogin?)!!
+
+        activityLogin.title = "Autenticacion"
 
         btnRegistrarse.setOnClickListener{
             if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
 
-                getInstance().
+                FirebaseAuth.getInstance().
                 createUserWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
                 addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
+                        activityLogin.showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
                     } else {
                         showAlert()
                     }
@@ -118,16 +106,34 @@ class Login : Fragment() {
         btnLogin.setOnClickListener {
             if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
 
-                getInstance().
+                FirebaseAuth.getInstance().
                 signInWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
                 addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
+                        activityLogin.showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
                     } else {
                         showAlert()
                     }
                 }
             }
         }
+
+        btnGoToResetPassword.setOnClickListener {
+
+            var action = LoginDirections.actionLoginToResetPassword()
+
+            vistaFragment.findNavController().navigate(action)
+
+        }
+    }
+
+    private fun showAlert() {
+        val builder = (activity as ActivityLogin?)!!.getBuilder()
+        builder.setTitle("Error")
+        builder.setMessage("Se ha producido un error autenticando al usuario")
+        builder.setPositiveButton("Aceptar", null)
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }

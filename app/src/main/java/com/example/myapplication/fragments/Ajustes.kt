@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.BuildCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import com.example.myapplication.PerfilDirections
 import com.example.myapplication.R
-import com.example.myapplication.btnHomeGoToHome
-import com.example.myapplication.vistaDescripIncidentes
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,17 +60,17 @@ class Ajustes : Fragment() {
 
             viewFragment.findNavController().navigate(action)
         }
-
-    val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-
-    Log.d("Preferencias", prefs.getBoolean("night_mode", false).toString() + " - night mode")
-    Log.d("Preferencias", prefs.getString("edit_email", "email default") + " - edit email")
     }
-
-    class SettingsFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.user_preferences, rootKey)
-        }
-
-    }
+//    val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+//
+//    Log.d("Preferencias", prefs.getBoolean("night_mode", false).toString() + " - night mode")
+//    Log.d("Preferencias", prefs.getString("edit_email", "email default") + " - edit email")
+//    }
+//
+//    class SettingsFragment : PreferenceFragmentCompat() {
+//
+//        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+//            setPreferencesFromResource(R.xml.user_preferences, rootKey)
+//        }
+//    }
 }

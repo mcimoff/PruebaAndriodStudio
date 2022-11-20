@@ -21,19 +21,27 @@
             android:title="Cambiar Contraseña"
             android:visibility="visible"
             tools:visibility="visible" />
+        <Preference
+            app:key="resetPasswordPreference"
+            app:title="Show me a Toast"
+            android:summary="Hace click acá para cambiar tu contraseña (mensaje de confirmación)."/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Otros">
-        <ListPreference
+        <!--<ListPreference
             android:defaultValue="1"
             android:entries="@array/listArrayUserPreferences"
             android:entryValues="@array/listArrayUserPreferences"
             android:key="list_preference_1"
             android:title="Lugar de trabajo"
-            app:summary="Marca la opción desde donde estás trabajando" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="night_mode"
-            android:title="Modo Nocturno" />
+            app:summary="Marca la opción desde donde estás trabajando" />-->
+        <ListPreference
+            app:defaultValue="@string/dark_mode_def_value"
+            app:entries="@array/dark_mode_entries"
+            app:entryValues="@array/dark_mode_values"
+            app:key="@string/dark_mode"
+            app:title="@string/dark_mode"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 </PreferenceScreen>
