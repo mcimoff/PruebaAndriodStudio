@@ -7,33 +7,20 @@
     tools:context=".BusquedaIncidentes">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="136dp"
         android:layout_height="45dp"
         android:text="Busqueda Incidentes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:accessibilityHeading="true"
-        android:background="#EAEAEA"
-        android:clickable="true"
-        android:focusable="auto"
-        android:focusedByDefault="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.364" />
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/simpleSearchView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#EAEAEA"
         android:iconifiedByDefault="false"
@@ -43,6 +30,15 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" /><!-- set query string of an search view -->/>
+        app:layout_constraintVertical_bias="0.225" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleBusqueda"
+        android:layout_width="409dp"
+        android:layout_height="341dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" /><!-- set query string of an search view -->/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,15 +16,11 @@ class Model {
     companion object{
 
 
-        fun create(baseUrl: String): JsonApi{
-
-            val client = OkHttpClient().newBuilder()
-                .build()
+        fun create(): JsonApi{
 
 
             return Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(client)
+                .baseUrl("http://192.168.0.13:3000/incidentes/incidenteXID/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(JsonApi::class.java)
