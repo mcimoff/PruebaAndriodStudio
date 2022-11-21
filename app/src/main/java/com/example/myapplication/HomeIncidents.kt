@@ -49,7 +49,6 @@ class HomeIncidents : Fragment() {
 
 
     lateinit var btnAlta: com.google.android.material.floatingactionbutton.FloatingActionButton
-     var incidents : MutableList<IncidentesResponse> = mutableListOf()
     lateinit var listIncidentes: RecyclerView
     lateinit var incidenteListAdapter: IncidenteListAdapter
     lateinit var  linearLayoutManager: LinearLayoutManager;
@@ -135,11 +134,15 @@ class HomeIncidents : Fragment() {
                        Log.i(TAG, "Llego: $incidentes")
 
 
+
+
                        val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
 
 
 
-                      if(incidents != null){
+
+
+                      if(incidentes != null){
 
                           linearLayoutManager = LinearLayoutManager(context)
 
