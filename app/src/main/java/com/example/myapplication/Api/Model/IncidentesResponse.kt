@@ -12,11 +12,12 @@ import kotlin.properties.Delegates
      //@field:SerializedName("fechaCreacion")val fechaCreacion: Date,
      @field:SerializedName("titulo")val titulo: String,
      @field:SerializedName("descripcionUsuario")val descripcionUsuario: String,
-
+     @field:SerializedName("estadoActual")val estadoActual: String,
 
      ) : Parcelable {
      constructor(parcel: Parcel) : this(
          parcel.readInt(),
+         parcel.readString().toString(),
          parcel.readString().toString(),
          parcel.readString().toString()
      ) {
@@ -26,6 +27,7 @@ import kotlin.properties.Delegates
          parcel.writeInt(_id)
          parcel.writeString(titulo)
          parcel.writeString(descripcionUsuario)
+         parcel.writeString(estadoActual)
      }
 
      override fun describeContents(): Int {

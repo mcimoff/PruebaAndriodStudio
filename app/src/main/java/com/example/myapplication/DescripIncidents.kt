@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -26,6 +27,7 @@ private const val ARG_PARAM2 = "param2"
       lateinit var titleIncidente: TextView
       lateinit var dato2: TextView
       lateinit var dato3: TextView
+      lateinit var check: CheckBox
 
 
 /**
@@ -62,6 +64,8 @@ class DescripIncidents : Fragment() {
 
         dato3 = vistaDescripIncidentes.findViewById(R.id.textIncidente3)
 
+        check = vistaDescripIncidentes.findViewById(R.id.checkBox)
+
 
         return vistaDescripIncidentes
     }
@@ -71,11 +75,15 @@ class DescripIncidents : Fragment() {
 
         //var programsid = Fragment2Args.fromBundle(requireArguments()).programsid
 
-        var incidenteText = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.titulo
+        var incidenteText =
+            DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.titulo
 
-        var incidentsText2 = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.descripcionUsuario
+        var incidentsText2 =
+            DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.descripcionUsuario
 
         var incidentsText3 = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject._id
+
+        var incidentsText4 = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.estadoActual
 
         titleIncidente.text = incidenteText
 
@@ -83,15 +91,25 @@ class DescripIncidents : Fragment() {
 
         dato3.text = incidentsText3.toString()
 
-        btnHomeGoToHome.setOnClickListener{
+        check.text = incidentsText4
+
+        btnHomeGoToHome.setOnClickListener {
 
 
-            var action6 = DescripIncidentsDirections.actionDescripIncidentsToHomeIncidents(contenidoID = "contenido")
+            var action6 =
+                DescripIncidentsDirections.actionDescripIncidentsToHomeIncidents(contenidoID = "contenido")
 
             vistaDescripIncidentes.findNavController().navigate(action6)
         }
+
+        check.setOnClickListener {
+            if (check.isChecked()) {
+                check.text = "Cerrado"
+            } else {
+                check.text = "Abierto"
+            }
+        }
+
     }
-
-
 
 }

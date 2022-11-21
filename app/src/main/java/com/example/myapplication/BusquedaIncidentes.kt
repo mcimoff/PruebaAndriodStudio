@@ -71,10 +71,7 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
     override fun onStart() {
         super.onStart()
 
-        for(i in 1..5){
-            incidents.add(IncidentesResponse(1,"Error compu","Carlos"))
-            incidents.add(IncidentesResponse(2,"Error Impresora","Luis"))
-        }
+
 
         btnBusqueda.setOnClickListener{
             btnBusqueda.setOnQueryTextListener(this)
