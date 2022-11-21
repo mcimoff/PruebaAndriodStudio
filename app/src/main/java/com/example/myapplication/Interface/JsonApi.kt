@@ -9,8 +9,8 @@ import retrofit2.http.Url
 
 interface JsonApi {
 
-    @GET("incidentes")
-    fun getIncidentes(): Call<IncidentesResponse>
+    @GET("/incidentes")
+    fun getIncidentes(): Call<List<IncidentesResponse>>
 
     @GET
     suspend fun getIncidente( @Url url: String): Response<IncidentesResponse>
