@@ -93,10 +93,7 @@ class HomeIncidents : Fragment() {
         super.onStart()
 
 
-        for(i in 1..5){
-            incidents.add(IncidentesResponse(1,"Error compu","Carlos"))
-            incidents.add(IncidentesResponse(1,"Error Impresora","Luis"))
-        }
+
         /*btnLogout.setOnClickListener {
 
             //indexID = "idx" dentro del parentesis
@@ -125,24 +122,20 @@ class HomeIncidents : Fragment() {
 
 
 
-        api.getIncidentes()?.enqueue(object : Callback<IncidentesResponse?>{
+        api.getIncidentes()?.enqueue(object : Callback<List<IncidentesResponse>?>{
                override fun onResponse(
-                   call: Call<IncidentesResponse?>,
-                   response: Response<IncidentesResponse?>
+                   call: Call<List<IncidentesResponse>?>,
+                   response: Response<List<IncidentesResponse>?>
                ){
                    if (response.code() == 200){
-                       val response: IncidentesResponse? =(response.body() as IncidentesResponse)!!
+                       val response: List<IncidentesResponse>? =(response.body() as List<IncidentesResponse>)!!
 
 
                        val incidentes = (response as List<IncidentesResponse>).toMutableList()
                        Log.i(TAG, "Llego: $incidentes")
-                       btnLogout.text = incidents.toString()
-
 
 
                        val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
-
-
 
 
 
@@ -163,7 +156,7 @@ class HomeIncidents : Fragment() {
 
                }
 
-               override fun onFailure(call: Call<IncidentesResponse?>, t: Throwable) {
+               override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
                   // TODO("Not yet implemented")
                    call.toString()
                }
