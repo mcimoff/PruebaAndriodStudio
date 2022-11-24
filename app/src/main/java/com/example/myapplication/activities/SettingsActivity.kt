@@ -33,6 +33,7 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         val darkModeString = getString(R.string.dark_mode)
         val resetPasswordString = "resetPasswordPreference"
+        //val resetEmailString = "resetEmailPreference"
 
         val bundle: Bundle? = intent.extras
         val email = bundle?.getString("email")
@@ -45,14 +46,12 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
                         darkModeValues[0] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                         darkModeValues[1] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                         darkModeValues[2] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        darkModeValues[3] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
                     }
                 }
                 resetPasswordString -> sharedPreferences?.let {
                     FirebaseAuth.getInstance().sendPasswordResetEmail(email!!)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                // Show the toast message and finish the forgot password activity to go back to the login screen.
                                 Toast.makeText(
                                     this,
                                     "El correo para reestablecer tu contraseña fue enviado.",
@@ -69,9 +68,27 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
                             }
                         }
                 }
-                else -> {
-
-                }
+//                resetEmailString -> sharedPreferences?.let {
+//                    FirebaseAuth.getInstance().updateCurrentUser(email!!)
+//                        .addOnCompleteListener { task ->
+//                            if (task.isSuccessful) {
+//                                Toast.makeText(
+//                                    this,
+//                                    "El correo para reestablecer tu email fue enviado.",
+//                                    Toast.LENGTH_LONG
+//                                ).show()
+//
+//                                this?.finish()
+//                            } else {
+//                                Toast.makeText(
+//                                    this,
+//                                    task.exception!!.message.toString(),
+//                                    Toast.LENGTH_LONG
+//                                ).show()
+//                            }
+//                        }
+//                }
+                else -> {}
             }
         }
     }

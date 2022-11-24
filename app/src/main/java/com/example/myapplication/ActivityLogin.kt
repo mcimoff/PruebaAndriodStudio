@@ -124,10 +124,9 @@ class ActivityLogin : AppCompatActivity() {
         dialog.show()
     }
 
-    fun showHome(email: String, provider: ProviderType) {
+    fun showHome(email: String) {
         val homeIntent = Intent(this, MainActivity::class.java).apply {
             putExtra("email", email)
-            putExtra("provider", provider.name)
         }
         startActivity(homeIntent)
     }

@@ -5,7 +5,7 @@
 
     <PreferenceCategory android:title="Seguridad">
 
-        <EditTextPreference
+        <!--<EditTextPreference
             android:key="edit_email"
             android:selectAllOnFocus="true"
             app:useSimpleSummaryProvider="true"
@@ -20,11 +20,23 @@
             android:summary="Escribí tu nueva contraseña para cambiarla"
             android:title="Cambiar Contraseña"
             android:visibility="visible"
-            tools:visibility="visible" />
-        <Preference
-            app:key="resetPasswordPreference"
-            app:title="Show me a Toast"
-            android:summary="Hace click acá para cambiar tu contraseña (mensaje de confirmación)."/>
+            tools:visibility="visible" />-->
+<!--        <SwitchPreference-->
+<!--            android:key="resetEmailPreference"-->
+<!--            android:title="Cambiar Email"-->
+<!--            android:summary="Hace click acá para cambiar tu email (mensaje de confirmación)"/>-->
+<!--        <EditTextPreference-->
+<!--            android:defaultValue="Default value"-->
+<!--            android:key="edit_text_preference_1"-->
+<!--            android:selectAllOnFocus="true"-->
+<!--            android:singleLine="true"-->
+<!--            android:title="Cambiar Contraseña"-->
+<!--            android:summary="EDIT TEXT - Hace click acá para cambiar tu contraseña (mensaje de confirmación)" />-->
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="resetPasswordPreference"
+            android:title="Cambiar Contraseña"
+            android:summary="Hace click acá para cambiar tu contraseña (mensaje de confirmación)"/>
 
     </PreferenceCategory>
 

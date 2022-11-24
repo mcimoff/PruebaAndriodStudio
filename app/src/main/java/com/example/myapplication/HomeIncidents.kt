@@ -80,7 +80,7 @@ class HomeIncidents : Fragment() {
         vistaHomeIncidentes = inflater.inflate(R.layout.home_incidents, container, false)
 
         btnLogout = vistaHomeIncidentes.findViewById((R.id.buttonLogOut))
-        btnAlta = vistaHomeIncidentes.findViewById((R.id.btnGoToAlta))
+        //btnAlta = vistaHomeIncidentes.findViewById((R.id.btnGoToAlta))
         listIncidentes = vistaHomeIncidentes.findViewById((R.id.recicleViewIncidentes))
         listIncidentes.setHasFixedSize(true)
 
@@ -112,11 +112,11 @@ class HomeIncidents : Fragment() {
 
         }
 
-        btnAlta.setOnClickListener{
-            var action6 = HomeIncidentsDirections.actionHomeIncidentsToAltaIncidents(altaID = "alta")
-
-            vistaHomeIncidentes.findNavController().navigate(action6)
-        }
+//        btnAlta.setOnClickListener{
+//            var action6 = HomeIncidentsDirections.actionHomeIncidentsToAltaIncidents(altaID = "alta")
+//
+//            vistaHomeIncidentes.findNavController().navigate(action6)
+//        }
 
 
 

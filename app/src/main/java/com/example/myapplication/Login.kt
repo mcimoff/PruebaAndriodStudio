@@ -1,8 +1,10 @@
 package com.example.myapplication
 
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +12,15 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.Api.Model.IncidentesResponse
+import com.example.myapplication.Api.Model.Model
+import com.example.myapplication.adapters.IncidenteListAdapter
 import com.example.myapplication.fragments.AjustesDirections
 import com.google.firebase.auth.FirebaseAuth
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +43,7 @@ class Login : Fragment() {
     lateinit var btnRegistrarse: Button
     lateinit var idEmail: EditText
     lateinit var idPassword : EditText
+    val api = Model.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +105,7 @@ class Login : Fragment() {
                 createUserWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
                 addOnCompleteListener {
                     if (it.isSuccessful) {
-                        activityLogin.showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
+                        activityLogin.showHome(it.result?.user?.email ?:"") //En caso de que no se envie un email, queda vacio pero no deberia pasar
                     } else {
                         showAlert()
                     }
@@ -105,12 +115,11 @@ class Login : Fragment() {
 
         btnLogin.setOnClickListener {
             if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
-
                 FirebaseAuth.getInstance().
                 signInWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
                 addOnCompleteListener {
                     if (it.isSuccessful) {
-                        activityLogin.showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
+                        activityLogin.showHome(it.result?.user?.email ?:"")
                     } else {
                         showAlert()
                     }
@@ -125,6 +134,50 @@ class Login : Fragment() {
             vistaFragment.findNavController().navigate(action)
 
         }
+        /*api.getUsuarioXEmail()?.enqueue(object : Callback<List<IncidentesResponse>?> {
+            override fun onResponse(
+                call: Call<List<IncidentesResponse>?>,
+                response: Response<List<IncidentesResponse>?>
+            ){
+                if (response.code() == 200){
+                    val response: List<IncidentesResponse>? =(response.body() as List<IncidentesResponse>)!!
+
+
+                    val incidentes = (response as List<IncidentesResponse>).toMutableList()
+                    Log.i(ContentValues.TAG, "Llego: $incidentes")
+
+
+
+
+                    val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
+
+
+
+
+
+                    if(incidentes != null){
+
+                        linearLayoutManager = LinearLayoutManager(context)
+
+                        listIncidentes.layoutManager = linearLayoutManager
+
+                        incidenteListAdapter = IncidenteListAdapter(incidentes)
+
+                        listIncidentes.adapter = incidenteListAdapter
+
+
+                    }
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
+                // TODO("Not yet implemented")
+                call.toString()
+            }
+        }
+        )*/
     }
 
     private fun showAlert() {
