@@ -52,11 +52,9 @@ class ResetPassword : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        btnSubmit.setOnClickListener {
-            // Get the email id from the input field.
-            val email: String = et_forgot_email.text.toString().trim { it <= ' ' }
 
-            // Now, If the email entered in blank then show the error message or else continue with the implemented feature.
+        btnSubmit.setOnClickListener {
+            val email: String = et_forgot_email.text.toString().trim { it <= ' ' }
             if (email.isEmpty()) {
                 Toast.makeText(
                     activity,
@@ -64,12 +62,9 @@ class ResetPassword : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                // This piece of code is used to send the reset password link to the user's email id if the user is registered.
                 FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                     .addOnCompleteListener { task ->
-
                         if (task.isSuccessful) {
-                            // Show the toast message and finish the forgot password activity to go back to the login screen.
                             Toast.makeText(
                                 activity,
                                 "El correo para reestablecer tu contraseña fue enviado.",
