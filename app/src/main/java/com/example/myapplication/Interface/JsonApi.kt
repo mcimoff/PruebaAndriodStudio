@@ -1,11 +1,12 @@
 package com.example.myapplication.Interface
 
 import com.example.myapplication.Api.Model.IncidentesResponse
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable
+import com.example.myapplication.Api.Model.UsuarioResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 
@@ -19,5 +20,9 @@ interface JsonApi {
 
     @GET("/incidentes/incidenteXID/{id}")
     suspend fun getIncidente(@Url url: String): Response<IncidentesResponse>
+
+    @GET("/usuarios/getusuario/{email}")
+    fun getUsuarioXEmail( @Query ("email")email: String): Call<UsuarioResponse>
+    //@Path investigar
 
 }

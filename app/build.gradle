@@ -5,6 +5,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-android-extensions'
 }
 
 
@@ -64,6 +65,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.preference:preference-ktx:1.2.0"
 // RecycleView
     implementation "androidx.recyclerview:recyclerview:ultima-version"
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

@@ -15,6 +15,7 @@ class ActivityLogin : AppCompatActivity() {
     lateinit var btnRegistrarse: Button
     lateinit var idEmail: EditText
     lateinit var idPassword : EditText
+    lateinit var btnResetPassword : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +23,20 @@ class ActivityLogin : AppCompatActivity() {
 
 
         //Analytics
+//        val analytics = FirebaseAnalytics.getInstance(this)
+//        val bundle = Bundle()
+//        bundle.putString("message", "Integracion de Firebase completa")
+//        analytics.logEvent("InitScreen", bundle)
+
+        // Setup
+        //setup()
+    }
+
+    fun startFirebaseAnalyticsInstance() {
         val analytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
         bundle.putString("message", "Integracion de Firebase completa")
         analytics.logEvent("InitScreen", bundle)
-
-        // Setup
-        setup()
     }
 
     /*override fun onStart() {
@@ -51,43 +59,59 @@ class ActivityLogin : AppCompatActivity() {
 
     }*/
 
-    private fun setup() {
-        title = "Autenticacion"
+//    private fun setup() {
+//        title = "Autenticacion"
+//
+//        btnLogin = this.findViewById(R.id.logeoButton)
+//        btnRegistrarse = this.findViewById(R.id.signUpButton)
+//        idEmail = this.findViewById((R.id.idEmailText))
+//        idPassword = this.findViewById(R.id.idPasswordText)
+//        btnResetPassword = this.findViewById(R.id.buttonGoToResetPassword)
+//
+//        btnRegistrarse.setOnClickListener{
+//            if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
+//
+//                FirebaseAuth.getInstance().
+//                createUserWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
+//                addOnCompleteListener {
+//                    if (it.isSuccessful) {
+//                        showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
+//                    } else {
+//                        showAlert()
+//                    }
+//                }
+//            }
+//        }
+//
+//        btnLogin.setOnClickListener {
+//            if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
+//
+//                FirebaseAuth.getInstance().
+//                signInWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
+//                addOnCompleteListener {
+//                    if (it.isSuccessful) {
+//                        showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
+//                    } else {
+//                        showAlert()
+//                    }
+//                }
+//            }
+//        }
+//
+//        btnResetPassword.setOnClickListener {
+//
+//            var action = AjustesDirections.actionAjustesToPerfil()
+//
+//            viewFragment.findNavController().navigate(action)
+//
+//            // Launch the forgot password screen when the user clicks on the forgot password text.
+//            startActivity(Intent(this@ActivityLogin, supportFragmentManager.::class.java))
+//
+//        }
+//    }
 
-        btnLogin = this.findViewById(R.id.logeoButton)
-        btnRegistrarse = this.findViewById(R.id.signUpButton)
-        idEmail = this.findViewById((R.id.idEmailText))
-        idPassword = this.findViewById(R.id.idPasswordText)
-
-        btnRegistrarse.setOnClickListener{
-            if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
-
-                FirebaseAuth.getInstance().
-                createUserWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
-                addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
-                    } else {
-                        showAlert()
-                    }
-                }
-            }
-        }
-
-        btnLogin.setOnClickListener {
-            if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
-
-                FirebaseAuth.getInstance().
-                signInWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
-                addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?:"", ProviderType.BASIC) //En caso de que no se envie un email, queda vacio pero no deberia pasar
-                    } else {
-                        showAlert()
-                    }
-                }
-            }
-        }
+    fun getBuilder() : AlertDialog.Builder{
+        return AlertDialog.Builder(this)
     }
 
     private fun showAlert() {
@@ -100,11 +124,18 @@ class ActivityLogin : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun showHome(email: String, provider: ProviderType) {
+    fun showHome(email: String) {
         val homeIntent = Intent(this, MainActivity::class.java).apply {
             putExtra("email", email)
-            putExtra("provider", provider.name)
         }
         startActivity(homeIntent)
     }
+
+//    private fun showHome(email: String, provider: ProviderType) {
+//        val homeIntent = Intent(this, MainActivity::class.java).apply {
+//            putExtra("email", email)
+//            putExtra("provider", provider.name)
+//        }
+//        startActivity(homeIntent)
+//    }
 }

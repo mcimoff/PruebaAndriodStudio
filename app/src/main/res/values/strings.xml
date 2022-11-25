@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">APP INCIDENTES</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="ui">UI</string>
+    <string name="dark_mode">Modo Noche</string>
+    <string name="dark_mode_def_value">MODE_NIGHT_FOLLOW_SYSTEM</string>
+    <string name="settings">Settings</string>
 
     <string-array name="listArrayUserPreferences">
         <item>Casa</item>
