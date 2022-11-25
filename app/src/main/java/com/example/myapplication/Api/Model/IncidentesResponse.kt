@@ -14,6 +14,7 @@ import kotlin.properties.Delegates
      @field:SerializedName("descripcionUsuario")val descripcionUsuario: String,
      @field:SerializedName("estadoActual")val estadoActual: String,
 
+
      ) : Parcelable {
      constructor(parcel: Parcel) : this(
          parcel.readInt(),

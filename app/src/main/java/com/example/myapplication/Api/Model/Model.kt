@@ -16,11 +16,11 @@ class Model {
     companion object{
 
 
-        fun create(): JsonApi{
+        fun create(url: String): JsonApi{
 
 
             return Retrofit.Builder()
-                .baseUrl("http://201.235.109.55:3000")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(JsonApi::class.java)

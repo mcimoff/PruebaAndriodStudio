@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.databinding.adapters.SearchViewBindingAdapter.setOnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +16,7 @@ import com.example.myapplication.adapters.IncidenteListAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,12 +35,14 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
 
     lateinit var vistaBusqueda : View
     lateinit var btnBusqueda : SearchView
-    val apiBusqueda = Model.create()
+    lateinit var textoBusqueda : TextView
+    val apiBusqueda = Model.create("http://192.168.0.13:3000")
     private lateinit var recycleBusqueda : RecyclerView
     private lateinit var adapterBusqueda : IncidenteListAdapter
-    private val incidente = mutableListOf<IncidentesResponse>()
+    private val incidentelist = mutableListOf<IncidentesResponse>()
     var incidents : MutableList<IncidentesResponse> = mutableListOf()
-
+    lateinit var  linearLayoutManager: LinearLayoutManager;
+    lateinit var incidenteListAdapter: IncidenteListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,68 +67,69 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
         btnBusqueda = vistaBusqueda.findViewById((R.id.simpleSearchView))
         recycleBusqueda = vistaBusqueda.findViewById((R.id.recycleBusqueda))
 
+        textoBusqueda = vistaBusqueda.findViewById((R.id.textBuscar))
+
         return vistaBusqueda
     }
 
     override fun onStart() {
         super.onStart()
 
+        btnBusqueda.setOnQueryTextListener(this)
 
+        linearLayoutManager = LinearLayoutManager(context)
 
-        btnBusqueda.setOnClickListener{
-            btnBusqueda.setOnQueryTextListener(this)
-            initRecyclerView()
-        }
+        recycleBusqueda.layoutManager = linearLayoutManager
+
+        incidenteListAdapter = IncidenteListAdapter(incidentelist)
+
+        recycleBusqueda.adapter = incidenteListAdapter
 
 
 
     }
 
 
-
-
-    private fun buscarID(query: String){
+    private fun searchById(query: String){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = apiBusqueda.getIncidente("$query")
-            val busqueda : IncidentesResponse? = call.body()
-
-            activity?.runOnUiThread{
+            val call: Response<IncidentesResponse> = apiBusqueda.getIncidente( "$query")
+            val incidente: IncidentesResponse? = call.body()
+            getActivity()?.runOnUiThread{
                 if(call.isSuccessful){
-                    val incidenteBuscado: List<IncidentesResponse> = (busqueda?._id ?: emptyList<IncidentesResponse>()) as List<IncidentesResponse>
-                    incidente.clear()
-                    incidente.addAll(incidenteBuscado)
+                    val incidenteBuscado : List<IncidentesResponse> = (incidente?._id) as List<IncidentesResponse>
+                    incidentelist.clear()
+                    incidentelist.addAll(incidenteBuscado)
                     adapterBusqueda.notifyDataSetChanged()
                 }else{
                     showError()
                 }
+
+
             }
-            
         }
     }
 
-    private fun showError() {
-        Toast.makeText(context, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun initRecyclerView() {
-        adapterBusqueda = IncidenteListAdapter(incidents)
-        recycleBusqueda.layoutManager = LinearLayoutManager(context)
-        recycleBusqueda.adapter = adapterBusqueda
-
-    }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if(!query.isNullOrEmpty()){
-            buscarID(query)
+            searchById(query.lowercase())
         }
         return true
     }
+
+
+
 
     override fun onQueryTextChange(newText: String?): Boolean {
         return true
     }
 
+    private fun showError() {
+        Toast.makeText(context,"Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+    }
 
 }
+
+
 
 
