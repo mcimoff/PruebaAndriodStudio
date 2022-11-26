@@ -18,7 +18,7 @@ interface JsonApi {
     //@GET("/incidentes/incidenteXID/{_id}")
     //fun getIncidente(@SafeParcelable.Para() ): Call<IncidentesResponse>
 
-    @GET("/incidentes/incidenteXID/{id}")
+    @GET
     suspend fun getIncidente(@Url url: String): Response<IncidentesResponse>
 
     @GET("/usuarios/getusuario/{email}")

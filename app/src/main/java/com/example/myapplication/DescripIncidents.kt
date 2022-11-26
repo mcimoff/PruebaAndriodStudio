@@ -9,6 +9,8 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.myapplication.Api.Model.AfectadoResponse
+import com.example.myapplication.Api.Model.IncidentesResponse
 import com.example.myapplication.Api.Model.Model
 import com.example.myapplication.Interface.JsonApi
 import kotlinx.coroutines.CoroutineScope
@@ -75,11 +77,9 @@ class DescripIncidents : Fragment() {
 
         //var programsid = Fragment2Args.fromBundle(requireArguments()).programsid
 
-        var incidenteText =
-            DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.titulo
+        var incidenteText = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.titulo
 
-        var incidentsText2 =
-            DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.descripcionUsuario
+        var incidentsText2 = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject.descripcionUsuario
 
         var incidentsText3 = DescripIncidentsArgs.fromBundle(requireArguments()).incidenteObject._id
 

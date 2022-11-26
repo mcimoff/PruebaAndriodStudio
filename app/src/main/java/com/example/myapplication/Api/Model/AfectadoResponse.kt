@@ -5,10 +5,10 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class AfectadoResponse(
-    @field:SerializedName("email") val email: String?,
-) : Parcelable {
-
-    constructor(parcel: Parcel) : this(parcel.readString()) {
+    @field:SerializedName("email") val email: String,
+): Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString().toString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -29,3 +29,4 @@ data class AfectadoResponse(
         }
     }
 }
+

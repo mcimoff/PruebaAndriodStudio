@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Api.Model.IncidentesResponse
 import com.example.myapplication.Api.Model.Model
+import com.example.myapplication.adapters.IdAdapter
 import com.example.myapplication.adapters.IncidenteListAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,14 +37,12 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
 
     lateinit var vistaBusqueda : View
     lateinit var btnBusqueda : SearchView
-    lateinit var textoBusqueda : TextView
-    val apiBusqueda = Model.create("http://192.168.0.13:3000")
+    val apiBusqueda = Model.create("http://192.168.0.13:3000/incidentes/incidenteXID/{id}")
     private lateinit var recycleBusqueda : RecyclerView
-    private lateinit var adapterBusqueda : IncidenteListAdapter
     private val incidentelist = mutableListOf<IncidentesResponse>()
     var incidents : MutableList<IncidentesResponse> = mutableListOf()
     lateinit var  linearLayoutManager: LinearLayoutManager;
-    lateinit var incidenteListAdapter: IncidenteListAdapter
+    lateinit var incidenteListAdapter: IdAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +50,14 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        var activity = activity
 
+        linearLayoutManager = LinearLayoutManager(context)
+
+        recycleBusqueda.layoutManager = linearLayoutManager
+
+        incidenteListAdapter = IdAdapter(incidentelist)
+
+        recycleBusqueda.adapter = incidenteListAdapter
 
 
     }
@@ -67,7 +73,7 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
         btnBusqueda = vistaBusqueda.findViewById((R.id.simpleSearchView))
         recycleBusqueda = vistaBusqueda.findViewById((R.id.recycleBusqueda))
 
-        textoBusqueda = vistaBusqueda.findViewById((R.id.textBuscar))
+
 
         return vistaBusqueda
     }
@@ -77,13 +83,7 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
 
         btnBusqueda.setOnQueryTextListener(this)
 
-        linearLayoutManager = LinearLayoutManager(context)
 
-        recycleBusqueda.layoutManager = linearLayoutManager
-
-        incidenteListAdapter = IncidenteListAdapter(incidentelist)
-
-        recycleBusqueda.adapter = incidenteListAdapter
 
 
 
@@ -93,13 +93,14 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
     private fun searchById(query: String){
         CoroutineScope(Dispatchers.IO).launch {
             val call: Response<IncidentesResponse> = apiBusqueda.getIncidente( "$query")
-            val incidente: IncidentesResponse? = call.body()
-            getActivity()?.runOnUiThread{
-                if(call.isSuccessful){
-                    val incidenteBuscado : List<IncidentesResponse> = (incidente?._id) as List<IncidentesResponse>
+            val incidenteBody: IncidentesResponse? = call.body()
+            activity?.runOnUiThread{
+                if (call.isSuccessful){
+                    val incidente: List<IncidentesResponse> = (incidenteBody?._id   as List<IncidentesResponse>)
+                    val incidenteBuscado : List<IncidentesResponse> = (incidente) as List<IncidentesResponse>
                     incidentelist.clear()
                     incidentelist.addAll(incidenteBuscado)
-                    adapterBusqueda.notifyDataSetChanged()
+                    incidenteListAdapter.notifyDataSetChanged()
                 }else{
                     showError()
                 }
