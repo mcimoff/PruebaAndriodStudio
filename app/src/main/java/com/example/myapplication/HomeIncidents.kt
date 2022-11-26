@@ -52,7 +52,7 @@ class HomeIncidents : Fragment() {
     lateinit var listIncidentes: RecyclerView
     lateinit var incidenteListAdapter: IncidenteListAdapter
     lateinit var  linearLayoutManager: LinearLayoutManager;
-    val api = Model.create()
+    val api = Model.create("http://192.168.0.13:3000")
 
 
 
@@ -141,7 +141,6 @@ class HomeIncidents : Fragment() {
 
 
 
-
                       if(incidentes != null){
 
                           linearLayoutManager = LinearLayoutManager(context)
@@ -160,7 +159,6 @@ class HomeIncidents : Fragment() {
                }
 
                override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
-                  // TODO("Not yet implemented")
                    call.toString()
                }
 

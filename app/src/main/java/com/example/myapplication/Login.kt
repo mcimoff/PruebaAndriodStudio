@@ -43,7 +43,7 @@ class Login : Fragment() {
     lateinit var btnRegistrarse: Button
     lateinit var idEmail: EditText
     lateinit var idPassword : EditText
-    val api = Model.create()
+    val api = Model.create("http://192.168.0.13:3000")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
