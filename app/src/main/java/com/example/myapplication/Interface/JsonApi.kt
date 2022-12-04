@@ -22,7 +22,6 @@ interface JsonApi {
     suspend fun getIncidente(@Url url: String): Response<IncidentesResponse>
 
     @GET("/usuarios/getusuario/{email}")
-    fun getUsuarioXEmail( @Query ("email")email: String): Call<UsuarioResponse>
-    //@Path investigar
+    fun getUsuarioXEmail( @Path ("email")email: String): Call<UsuarioResponse?>
 
 }

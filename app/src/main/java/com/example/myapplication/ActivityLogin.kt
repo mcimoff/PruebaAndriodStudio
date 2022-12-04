@@ -1,13 +1,18 @@
 package com.example.myapplication
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.Api.Model.UsuarioResponse
+import com.example.myapplication.activities.MainResolutorActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
 
 
 class ActivityLogin : AppCompatActivity() {
@@ -21,6 +26,12 @@ class ActivityLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        if (isUserSignedIn()) {
+            val preferences = getSharedPreferencesFromActivity()
+            val usuario = getObject(preferences, "USUARIO_KEY", UsuarioResponse::class.java) as UsuarioResponse
+            showHome("", usuario)
+        }
+
 
         //Analytics
 //        val analytics = FirebaseAnalytics.getInstance(this)
@@ -32,11 +43,19 @@ class ActivityLogin : AppCompatActivity() {
         //setup()
     }
 
+    fun isUserSignedIn(): Boolean {
+        return FirebaseAuth.getInstance().currentUser != null
+    }
+
     fun startFirebaseAnalyticsInstance() {
         val analytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
         bundle.putString("message", "Integracion de Firebase completa")
         analytics.logEvent("InitScreen", bundle)
+    }
+
+    fun getSharedPreferencesFromActivity(): SharedPreferences {
+        return getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
     }
 
     /*override fun onStart() {
@@ -124,12 +143,38 @@ class ActivityLogin : AppCompatActivity() {
         dialog.show()
     }
 
-    fun showHome(email: String) {
-        val homeIntent = Intent(this, MainActivity::class.java).apply {
-            putExtra("email", email)
+    fun showHome(email: String, usuario: UsuarioResponse) {
+        var homeIntent: Intent? = null
+        if (usuario.esResolutor) {
+//            homeIntent = Intent(this, MainResolutorActivity::class.java).apply {
+//                putExtra("usuario", usuario)
+//            }
+            homeIntent = Intent(this, MainResolutorActivity::class.java)
+            homeIntent.putExtra("usuario", usuario)
+        } else {
+            homeIntent = Intent(this, MainActivity::class.java).apply {
+                putExtra("usuario", usuario)
+            }
         }
         startActivity(homeIntent)
     }
+
+    fun getObject(preferences: SharedPreferences, key: String, clazz: Class<*>): Any? {
+        val gson = Gson()
+        val json = preferences.getString(key, null)
+        return gson.fromJson(json, clazz)
+    }
+
+//    fun showHomeWOResponse() {
+//        val homeIntent = Intent(this, MainActivity::class.java)
+//        startActivity(homeIntent)
+//    }
+
+
+
+
+
+
 
 //    private fun showHome(email: String, provider: ProviderType) {
 //        val homeIntent = Intent(this, MainActivity::class.java).apply {

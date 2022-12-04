@@ -12,6 +12,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.example.myapplication.R
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener,
@@ -94,16 +95,36 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
+//        val USER_ID_KEY = "user_id"
+//        val USER_EMAIL_KEY = "user_email"
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.user_preferences, rootKey)
         }
+
+//        // Save the user's ID and email using SharedPreferences
+//        fun saveUser(authResult: AuthResult) {
+//            val sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+//            val editor = sharedPreferences.edit()
+//            editor.putString(USER_ID_KEY, authResult.user.uid)
+//            editor.putString(USER_EMAIL_KEY, authResult.user.email)
+//            editor.apply()
+//        }
+//
+//        // Check if the user is already logged in
+//        fun isUserLoggedIn(): Boolean {
+//            val sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+//            val userId = sharedPreferences.getString(USER_ID_KEY, null)
+//            val userEmail = sharedPreferences.getString(USER_EMAIL_KEY, null)
+//            return userId != null && userEmail != null
+//        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .unregisterOnSharedPreferenceChangeListener(this)
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        PreferenceManager.getDefaultSharedPreferences(this)
+//            .unregisterOnSharedPreferenceChangeListener(this)
+//    }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
