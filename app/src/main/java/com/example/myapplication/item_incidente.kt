@@ -38,6 +38,7 @@ class item_incidente : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         vistaItem = inflater.inflate(R.layout.fragment_item_incidente, container, false)
 
         btnGoToDescrip = vistaItem.findViewById((R.id.btnGoToDescirp))

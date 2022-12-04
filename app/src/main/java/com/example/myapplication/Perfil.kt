@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,8 +21,12 @@ class Perfil : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var viewFragment : View
+    lateinit var btnLogout: Button
     lateinit var receptorTV : TextView
-    lateinit var providerTV : TextView
+    //lateinit var providerTV : TextView
+    lateinit var holaNombre : TextView
+    lateinit var esResolutorTV : TextView
+    lateinit var puestoTV : TextView
     lateinit var btnAjustes : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,22 +43,44 @@ class Perfil : Fragment() {
         return viewFragment
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
-        receptorTV = viewFragment.findViewById(R.id.receptorTextView)
-        providerTV = viewFragment.findViewById(R.id.providerTextView)
+
+        val mainActivity = (activity as MainActivity?)!!
+
+        btnLogout = viewFragment.findViewById((R.id.buttonLogOut))
+
+        receptorTV = viewFragment.findViewById(R.id.emailTextView)
+        //providerTV = viewFragment.findViewById(R.id.providerTextView)
         btnAjustes = viewFragment.findViewById(R.id.buttonAjustes)
+        holaNombre = viewFragment.findViewById(R.id.holaNombreTextView)
+        esResolutorTV = viewFragment.findViewById(R.id.esResolutorTextView)
+        puestoTV = viewFragment.findViewById(R.id.puestoTextView)
 
-        receptorTV.text = (activity as MainActivity?)!!.getEmail()
-        providerTV.text = (activity as MainActivity?)!!.getTipoUsuario()
 
-        btnAjustes.setOnClickListener {
+        holaNombre.text = ("Hola ${mainActivity.getUsuario().nombre}!")
 
-            var action = PerfilDirections.actionPerfilToAjustes()
+        receptorTV.text = ("Email: ${mainActivity.getUsuario().email}")
+        //providerTV.text = (activity as MainActivity?)!!.getTipoUsuario()
+        puestoTV.text = ("Puesto: ${mainActivity.getUsuario().puesto}")
 
-            viewFragment.findNavController().navigate(action)
+        if (mainActivity.getUsuario().esResolutor) {
+            esResolutorTV.text = "Tipo de usuario: Resolutor"
+        } else {
+            esResolutorTV.text = "Tipo de usuario: Usuario"
         }
+
+
+
+        btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+
+            var action3 = PerfilDirections.actionPerfilToActivityLogin()
+
+            viewFragment.findNavController().navigate(action3)
         }
+    }
 
     /*override fun onStart() {
         super.onStart()

@@ -11,11 +11,6 @@
         android:label="home_incidents"
         tools:layout="@layout/home_incidents" >
         <action
-            android:id="@+id/action_home_incidents_to_activity_login"
-            app:destination="@id/activity_login"
-            app:popUpTo="@id/home_incidents"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_home_incidents_to_descrip_incidents"
             app:destination="@id/descrip_incidents"
             app:popUpTo="@id/home_incidents"
@@ -78,8 +73,8 @@
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" >
         <action
-            android:id="@+id/action_perfil_to_ajustes"
-            app:destination="@id/ajustes"
+            android:id="@+id/action_perfil_to_activity_login"
+            app:destination="@id/activity_login"
             app:popUpTo="@id/perfil"
             app:popUpToInclusive="true" />
     </fragment>

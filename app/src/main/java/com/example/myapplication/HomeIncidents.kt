@@ -40,13 +40,11 @@ class HomeIncidents : Fragment() {
     private var param2: String? = null
 
     lateinit var vistaHomeIncidentes : View
-    lateinit var btnLogout: Button
 
     lateinit var btnHomeGoToIncidente1: Button
     lateinit var btnHomeGoToIncidente2: Button
     lateinit var receptorTV: TextView
     lateinit var providerTV: TextView
-
 
     lateinit var btnAlta: com.google.android.material.floatingactionbutton.FloatingActionButton
     lateinit var listIncidentes: RecyclerView
@@ -79,7 +77,6 @@ class HomeIncidents : Fragment() {
         // Inflate the layout for this fragment
         vistaHomeIncidentes = inflater.inflate(R.layout.home_incidents, container, false)
 
-        btnLogout = vistaHomeIncidentes.findViewById((R.id.buttonLogOut))
         //btnAlta = vistaHomeIncidentes.findViewById((R.id.btnGoToAlta))
         listIncidentes = vistaHomeIncidentes.findViewById((R.id.recicleViewIncidentes))
         listIncidentes.setHasFixedSize(true)
@@ -102,15 +99,6 @@ class HomeIncidents : Fragment() {
 
         }*/
 
-        btnLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            //onBackPressed()
-            //indexID = "idx" dentro del parentesis
-            var action3 = HomeIncidentsDirections.actionHomeIncidentsToActivityLogin()
-
-            vistaHomeIncidentes.findNavController().navigate(action3)
-
-        }
 
 //        btnAlta.setOnClickListener{
 //            var action6 = HomeIncidentsDirections.actionHomeIncidentsToAltaIncidents(altaID = "alta")
