@@ -14,12 +14,15 @@ import kotlin.properties.Delegates
      @field:SerializedName("descripcionUsuario")val descripcionUsuario: String,
      @field:SerializedName("estadoActual")val estadoActual: String,
 
+
      ) : Parcelable {
      constructor(parcel: Parcel) : this(
          parcel.readInt(),
          parcel.readString().toString(),
          parcel.readString().toString(),
          parcel.readString().toString()
+
+
      ) {
      }
 
@@ -28,6 +31,7 @@ import kotlin.properties.Delegates
          parcel.writeString(titulo)
          parcel.writeString(descripcionUsuario)
          parcel.writeString(estadoActual)
+
      }
 
      override fun describeContents(): Int {
