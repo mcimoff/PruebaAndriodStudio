@@ -9,13 +9,17 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
+
 interface JsonApi {
 
     @GET("/incidentes")
     fun getIncidentes(): Call<List<IncidentesResponse>>
 
+    //@GET("/incidentes/incidenteXID/{_id}")
+    //fun getIncidente(@SafeParcelable.Para() ): Call<IncidentesResponse>
+
     @GET
-    suspend fun getIncidente( @Url url: String): Response<IncidentesResponse>
+    suspend fun getIncidente(@Url url: String): Response<IncidentesResponse>
 
     @GET("/usuarios/getusuario/{email}")
     fun getUsuarioXEmail( @Path ("email")email: String): Call<UsuarioResponse?>
