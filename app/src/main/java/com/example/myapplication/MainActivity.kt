@@ -60,12 +60,12 @@ class MainActivity : AppCompatActivity() {
 
         val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
 
-// Store the object in the SharedPreferences file
+        // Store the object in the SharedPreferences file
         val editor = preferences.edit()
         putObject(editor, "USUARIO_KEY", getUsuario())
         editor.apply()
 
-// Retrieve the object from the SharedPreferences file
+        // Retrieve the object from the SharedPreferences file
         //val usuario = getObject(preferences, "USUARIO_KEY", UsuarioResponse::class.java) as UsuarioResponse
 
 
@@ -99,9 +99,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getUsuario(): UsuarioResponse {
-//        val bundle: Bundle? = intent.extras
-
         val usuario = intent.getSerializableExtra("usuario") as UsuarioResponse
+
         // Check if the extra is of the correct type
 //        if (usuario is UsuarioResponse) {
 //            // Cast the extra to the correct type
@@ -115,11 +114,6 @@ class MainActivity : AppCompatActivity() {
 //        }
         return usuario
     }
-
-//    fun getTipoUsuario(): String? {
-//        val bundle: Bundle? = intent.extras
-//        return bundle?.getString("provider")
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
