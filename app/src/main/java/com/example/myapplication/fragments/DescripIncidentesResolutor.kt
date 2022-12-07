@@ -83,7 +83,7 @@ class DescripIncidentesResolutor : Fragment() {
 
 
             var action6 =
-                DescripIncidentsDirections.actionDescripIncidentsToHomeIncidents(contenidoID = "contenido")
+                DescripIncidentesResolutorDirections.actionDescripIncidentsResolutorToHomeIncidents(contenidoID = "contenido")
 
             vistaDescripIncidentes.findNavController().navigate(action6)
         }
