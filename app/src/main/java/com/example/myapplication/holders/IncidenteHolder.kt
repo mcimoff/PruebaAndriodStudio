@@ -53,7 +53,6 @@ class IncidenteHolder(v: View): RecyclerView.ViewHolder(v) {
         btnDescrip.setOnClickListener {
 
             if (view.findNavController().currentDestination?.id == R.id.busquedaIncidentes) {
-                val hola = view.findNavController().currentDestination?.id
 
                 action = BusquedaIncidentesDirections.actionBusquedaIncidentesToDescripIncidents(incidente)
                 actionResolutor = BusquedaIncidentesDirections.actionBusquedaIncidentesToDescripIncidentsResolutor(incidente)
@@ -86,36 +85,5 @@ class IncidenteHolder(v: View): RecyclerView.ViewHolder(v) {
         val json = preferences.getString(key, null)
         return gson.fromJson(json, clazz)
     }
-
-//    fun getData(context: Context): UsuarioResponse {
-//        if (usuario == null) {
-//
-//            // Get a reference to the preferences
-//            val preferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-//            // Retrieve the values of the data class fields from the preferences
-//            val field1 = preferences.getString("field1", "")
-//            val field2 = preferences.getInt("field2", 0)
-//
-//            // Use the data class constructor to create a new instance of the object
-//            myData = MyData(field1, field2)
-//        }
-//            return myData
-//    }
-
-//    // Define a function to save the data class instance to preferences
-//    fun saveData(context: Context, data: MyData) {
-//        // Get a reference to the preferences
-//        val preferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-//
-//        // Use the put* methods of the SharedPreferences.Editor to save the values of the data class fields
-//        preferences.edit()
-//            .putString("field1", data.field1)
-//            .putInt("field2", data.field2)
-//            .apply()
-//
-//        // Save the data class instance to the holder variable
-//        myData = data
-//        }
-//    }
 
 }

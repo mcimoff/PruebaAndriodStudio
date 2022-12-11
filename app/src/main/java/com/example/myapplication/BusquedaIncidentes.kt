@@ -47,25 +47,6 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        val mainActivity = (activity as MainActivity?)!!
-
-        //linearLayoutManager = LinearLayoutManager(context)
-
-//        // Check if the lateinit property is initialized
-//        if (::recycleBusqueda.isInitialized) {
-//            // Use the property
-//            recycleBusqueda.layoutManager = LinearLayoutManager(activity)
-//        }
-//
-//        recycleBusqueda.layoutManager = LinearLayoutManager(activity)
-//        //recycleBusqueda.layoutManager = linearLayoutManager
-//
-//        incidenteListAdapter = IdAdapter(incidentelist)
-//
-//        recycleBusqueda.adapter = incidenteListAdapter
-
-
     }
 
 
@@ -96,59 +77,7 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
         super.onStart()
 
         btnBusqueda.setOnQueryTextListener(this)
-
-
-
-
-
     }
-
-//    private fun searchById(query: String) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val hola = apiBusqueda.getIncidente( "$query")
-//            if (apiBusqueda.getIncidente("$query") != null) {
-//                apiBusqueda.getIncidente( "$query")?.enqueue(object : Callback<IncidenteResponse?> {
-//                    override fun onResponse(
-//                        call: Call<IncidenteResponse?>,
-//                        response: Response<IncidenteResponse?>
-//                    ){
-//                        if (response.code() == 200){
-//                            val response: IncidenteResponse = (response.body() as IncidenteResponse)
-//                            val id = response._id.toString()
-//                            val usuario = response.toString()
-//                            Log.d("Usuario","Llego: $usuario")
-//                        }
-//                    }
-//                    override fun onFailure(call: Call<UsuarioResponse?>, t: Throwable) {
-//                        // TODO("Not yet implemented")
-//                        call.toString()
-//                    }
-//                }
-//                )
-//            }
-//        }
-//    }
-
-
-//    private fun searchById(query: String){
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val call: Response<IncidenteResponse> = apiBusqueda.getIncidente( "$query")
-//            val incidenteBody: IncidenteResponse? = call.body()
-//            activity?.runOnUiThread{
-//                if (call.isSuccessful){
-//                    val incidente: IncidenteResponse = (incidenteBody?._id   as IncidenteResponse)
-//                    val incidenteBuscado : IncidenteResponse = (incidente)
-//                    incidentelist.clear()
-//                    incidentelist.addAll(incidenteBuscado)
-//                    incidenteListAdapter.notifyDataSetChanged()
-//                }else{
-//                    showError()
-//                }
-//
-//
-//            }
-//        }
-//    }
 
     private fun searchById(query: String){
         CoroutineScope(Dispatchers.IO).launch {
@@ -179,9 +108,6 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
         return true
     }
 
-
-
-
     override fun onQueryTextChange(newText: String?): Boolean {
         return true
     }
@@ -191,7 +117,3 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
     }
 
 }
-
-
-
-
