@@ -79,8 +79,8 @@ class DescripIncidentesResolutor : Fragment() {
 
         check.text = incidentsText4
 
-        btnHomeGoToHome.setOnClickListener {
 
+        btnHomeGoToHome.setOnClickListener {
 
             var action6 =
                 DescripIncidentesResolutorDirections.actionDescripIncidentsResolutorToHomeIncidents(contenidoID = "contenido")

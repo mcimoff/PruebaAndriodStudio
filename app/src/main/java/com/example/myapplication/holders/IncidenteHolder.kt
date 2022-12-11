@@ -6,10 +6,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.navigation.ActivityNavigator
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Api.Model.IncidentesResponse
 import com.example.myapplication.Api.Model.UsuarioResponse
+import com.example.myapplication.BusquedaIncidentes
+import com.example.myapplication.BusquedaIncidentesDirections
 import com.example.myapplication.Entities.Incidente
 import com.example.myapplication.HomeIncidentsDirections
 import com.example.myapplication.R
@@ -27,7 +31,7 @@ class IncidenteHolder(v: View): RecyclerView.ViewHolder(v) {
     init {
         context = v.context
         this.view = v
-        this.btnDescrip = view.findViewById((R.id.btnGoToDescirp))
+        this.btnDescrip = view.findViewById((R.id.btnGoToDescrip))
     }
 
     fun setName(name: String){
@@ -35,26 +39,38 @@ class IncidenteHolder(v: View): RecyclerView.ViewHolder(v) {
         txt.text = name
     }
 
-
-
     fun getCardLayout (): CardView{
         return view.findViewById(R.id.card_package_item)
     }
 
     fun redirection (incidente: IncidentesResponse){
 
+        //val navController = view.findNavController()
+        var action: Any?
+        var actionResolutor: Any?
+
+
         btnDescrip.setOnClickListener {
+
+            if (view.findNavController().currentDestination?.id == R.id.busquedaIncidentes) {
+                val hola = view.findNavController().currentDestination?.id
+
+                action = BusquedaIncidentesDirections.actionBusquedaIncidentesToDescripIncidents(incidente)
+                actionResolutor = BusquedaIncidentesDirections.actionBusquedaIncidentesToDescripIncidentsResolutor(incidente)
+
+            } else {
+                action = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidents(incidente)
+                actionResolutor = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidentesResolutor(incidente)
+            }
 
             if (getData(context).esResolutor) {
                 val txt: TextView = view.findViewById(R.id.text_name_item)
-                var action = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidentesResolutor(incidente)
 
-                view.findNavController().navigate(action)
+                view.findNavController().navigate(actionResolutor as NavDirections)
             } else {
                 val txt: TextView = view.findViewById(R.id.text_name_item)
-                var action = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidents(incidente)
 
-                view.findNavController().navigate(action)
+                view.findNavController().navigate(action as NavDirections)
             }
         }
     }

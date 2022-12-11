@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +38,7 @@ class Perfil : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         viewFragment = inflater.inflate(R.layout.fragment_perfil, container, false)
@@ -75,6 +78,12 @@ class Perfil : Fragment() {
 
         btnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
+
+            // Get a reference to the SharedPreferences object
+            val prefs: SharedPreferences = mainActivity.getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+            val editor = prefs.edit()
+            editor.remove("USUARIO_KEY")
+            editor.apply()
 
             var action3 = PerfilDirections.actionPerfilToActivityLogin()
 

@@ -29,13 +29,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnGoToDescirp"
+            android:id="@+id/btnGoToDescrip"
             android:layout_width="54dp"
             android:layout_height="46dp"
             android:layout_marginStart="16dp"
             android:text="+"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
