@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:shape="oval"
     android:id="@+id/frameIndex"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,10 +37,19 @@
             android:id="@+id/idEmailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_view"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:paddingHorizontal="10dp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            tools:layout_editor_absoluteX="-166dp"
+            tools:layout_editor_absoluteY="311dp" />
 
         <EditText
             android:id="@+id/idPasswordText"
@@ -47,8 +57,17 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Contraseña"
+            android:background="@drawable/rounded_corner_view"
+            android:paddingHorizontal="10dp"
             android:inputType="textPassword"
+            android:textStyle="bold"
             android:minHeight="48dp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            tools:layout_editor_absoluteX="-166dp"
+            tools:layout_editor_absoluteY="311dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,8 +78,8 @@
                 android:id="@+id/logeoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:layout_weight="2"
+                app:backgroundTint="@color/colorPrimaryButtons"
                 android:text="Ingresar"
                 android:textColor="@color/white"
                 tools:ignore="TextContrastCheck" />
@@ -76,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorSecondaryButtons"
                 android:text="Registrarse"
                 android:textColor="@color/white"
                 tools:ignore="TextContrastCheck" />
@@ -89,7 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="188dp"
         android:text="Olvidé mi contraseña"
-        android:textColor="#1DE9B6"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        app:backgroundTint="@color/colorTerciaryButtons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -103,9 +124,13 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif-condensed-light"
         android:text="GESTION DE INCIDENTES"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:typeface="normal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

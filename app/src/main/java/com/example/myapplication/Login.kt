@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.compose.animation.animateColorAsState
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,7 +48,7 @@ class Login : Fragment() {
     lateinit var btnRegistrarse: Button
     lateinit var idEmail: EditText
     lateinit var idPassword : EditText
-    val api = Model.create("http://192.168.0.13:3000")
+    val api = Model.create("http://192.168.0.134:3000")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,57 +126,8 @@ class Login : Fragment() {
 
         return vistaFragment
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//
-//        btnGoToResetPassword.setOnClickListener{
-//
-//            var idEmail =  idEmail.text.toString()
-//            var action = LoginDirections.actionLoginToResetPassword(idEmail)
-//
-//            vistaFragment.findNavController().navigate(action)
-//        }
-//
-//        btnLogin.setOnClickListener{
-//            //var idPassword = idPassword.text.toString() - idPassword en los parentesis
-//            var action2 = LoginDirections.actionLoginToMainActivity()
-//
-//            vistaFragment.findNavController().navigate(action2)
-//        }
-//
-//    }
     private fun setup() {
         activityLogin.title = "Autenticacion"
-
-        /*btnRegistrarse.setOnClickListener{
-            if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
-
-                FirebaseAuth.getInstance().
-                createUserWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
-                addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        activityLogin.showHome(it.result?.user?.email ?:"", ) //En caso de que no se envie un email, queda vacio pero no deberia pasar
-                    } else {
-                        showAlert()
-                    }
-                }
-            }
-        }*/
-
-//        btnLogin.setOnClickListener {
-//            if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
-//                FirebaseAuth.getInstance().
-//                signInWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
-//                addOnCompleteListener {
-//                    if (it.isSuccessful) {
-//                        activityLogin.showHome(it.result?.user?.email ?:"")
-//                    } else {
-//                        showAlert()
-//                    }
-//                }
-//            }
-//        }
 
         btnLogin.setOnClickListener {
             if (idEmail.text.isNotEmpty() && idPassword.text.isNotEmpty()) {
@@ -185,8 +137,6 @@ class Login : Fragment() {
                     if (it.isSuccessful) {
 
                         Log.d(TAG, "signInWithEmail:success")
-                        val user = FirebaseAuth.getInstance().currentUser.toString()
-                        //FirebaseAuth.getInstance().setPersistence(FirebaseAuth.Persistence.SESSION)
                         api.getUsuarioXEmail(it.result?.user?.email ?:"")?.enqueue(object : Callback<UsuarioResponse?> {
                             override fun onResponse(
                                 call: Call<UsuarioResponse?>,
@@ -225,8 +175,8 @@ class Login : Fragment() {
                     }
                 }
             }
-
         }
+
 
         btnGoToResetPassword.setOnClickListener {
 
@@ -236,40 +186,6 @@ class Login : Fragment() {
 
         }
     }
-
-//    private fun getDatosUsuario() {
-//        api.getUsuarioXEmail(it.result?.user?.email ?:"")?.enqueue(object : Callback<UsuarioResponse?> {
-//            override fun onResponse(
-//                call: Call<UsuarioResponse?>,
-//                response: Response<UsuarioResponse?>
-//            ){
-//                if (response.code() == 200){
-//                    val response: UsuarioResponse = (response.body() as UsuarioResponse)
-//                    val id = response._id.toString()
-//                    val usuario = response.toString()
-//                    Log.d("Usuario","Llego: $usuario")
-//                    activityLogin.showHome(it.result?.user?.email ?:"", response)
-//
-//                    /*if(usuario != null){
-//
-//                        linearLayoutManager = LinearLayoutManager(context)
-//
-//                        listIncidentes.layoutManager = linearLayoutManager
-//
-//                        incidenteListAdapter = IncidenteListAdapter(incidentes)
-//
-//                        listIncidentes.adapter = incidenteListAdapter
-//
-//                    }*/
-//
-//                }
-//            }
-//            override fun onFailure(call: Call<UsuarioResponse?>, t: Throwable) {
-//                // TODO("Not yet implemented")
-//                call.toString()
-//            }
-//        }
-//    }
 
     private fun showAlert() {
         val builder = (activity as ActivityLogin?)!!.getBuilder()

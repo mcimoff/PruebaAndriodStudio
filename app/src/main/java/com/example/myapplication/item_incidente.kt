@@ -23,7 +23,7 @@ class item_incidente : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var vistaItem: View
-    lateinit var  btnGoToDescrip: Button
+    lateinit var btnGoToDescrip: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class item_incidente : Fragment() {
 
         vistaItem = inflater.inflate(R.layout.fragment_item_incidente, container, false)
 
-        btnGoToDescrip = vistaItem.findViewById((R.id.btnGoToDescirp))
+        btnGoToDescrip = vistaItem.findViewById((R.id.btnGoToDescrip))
 
         return  vistaItem;
     }

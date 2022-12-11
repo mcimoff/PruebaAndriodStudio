@@ -19,11 +19,11 @@ class IdHolder(v: View): RecyclerView.ViewHolder(v) {
 
     init {
         this.view = v
-        this.btnDescrip = view.findViewById((R.id.btnGoToDescirp))
+        this.btnDescrip = view.findViewById((R.id.btnGoToDescrip))
     }
 
     fun setName(name: String){
-        val txt: TextView = view.findViewById(R.id.text_name_item_id)
+        val txt: TextView = view.findViewById(R.id.text_name_item)
         txt.text = name
     }
 

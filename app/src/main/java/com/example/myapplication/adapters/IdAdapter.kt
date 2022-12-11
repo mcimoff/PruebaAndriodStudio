@@ -11,7 +11,7 @@ class IdAdapter (
     private var incidenteList: MutableList<IncidentesResponse>
 ): RecyclerView.Adapter<IdHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_id_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_item_incidente,parent,false)
         return (IdHolder(view))
     }
 

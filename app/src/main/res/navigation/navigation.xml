@@ -68,8 +68,11 @@
         android:label="busqueda_incidentes"
         tools:layout="@layout/busqueda_incidentes" >
         <action
-            android:id="@+id/action_busquedaIncidentes_to_descrip_incidents2"
+            android:id="@+id/action_busquedaIncidentes_to_descrip_incidents"
             app:destination="@id/descrip_incidents" />
+        <action
+            android:id="@+id/action_busquedaIncidentes_to_descrip_incidents_resolutor"
+            app:destination="@id/descripIncidentesResolutor" />
     </fragment>
     <fragment
         android:id="@+id/historial"
@@ -121,6 +124,11 @@
         <action
             android:id="@+id/action_descrip_incidents_resolutor_to_home_incidents"
             app:destination="@id/home_incidents"
+            app:popUpTo="@id/descripIncidentesResolutor"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_descrip_incidents_resolutor_to_busqueda_incidentes"
+            app:destination="@id/busquedaIncidentes"
             app:popUpTo="@id/descripIncidentesResolutor"
             app:popUpToInclusive="true" />
         <argument
