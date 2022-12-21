@@ -5,7 +5,11 @@ buildscript {
         mavenCentral()
         maven {
             url "https://plugins.gradle.org/m2/"
+
         }
+       /* maven {
+            url 'https://github.com/jitsi/jitsi-maven-repository/raw/master/releases'
+        } */
     }
     dependencies {
 
@@ -17,10 +21,13 @@ buildscript {
         def nav_version = "2.5.1"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
 
+
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+
 
 
 /*allprojects {

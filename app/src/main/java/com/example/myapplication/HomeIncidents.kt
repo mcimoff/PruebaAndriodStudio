@@ -50,7 +50,7 @@ class HomeIncidents : Fragment() {
     lateinit var listIncidentes: RecyclerView
     lateinit var incidenteListAdapter: IncidenteListAdapter
     lateinit var  linearLayoutManager: LinearLayoutManager;
-    val api = Model.create("http://192.168.0.134:3000")
+    val api = Model.create("http://192.168.0.13:3000")
 
 
 
