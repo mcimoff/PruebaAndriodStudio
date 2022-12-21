@@ -32,6 +32,7 @@ private const val ARG_PARAM2 = "param2"
       lateinit var check: CheckBox
 
 
+
 /**
  * A simple [Fragment] subclass.
  * Use the [DescripIncidents.newInstance] factory method to
@@ -69,11 +70,14 @@ class DescripIncidents : Fragment() {
         check = vistaDescripIncidentes.findViewById(R.id.checkBox)
 
 
+
         return vistaDescripIncidentes
     }
 
     override fun onStart() {
         super.onStart()
+
+
 
         //var programsid = Fragment2Args.fromBundle(requireArguments()).programsid
 
