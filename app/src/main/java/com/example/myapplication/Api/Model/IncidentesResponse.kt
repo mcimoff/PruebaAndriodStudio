@@ -22,7 +22,6 @@ import kotlin.properties.Delegates
          parcel.readString().toString(),
          parcel.readString().toString()
 
-
      ) {
      }
 

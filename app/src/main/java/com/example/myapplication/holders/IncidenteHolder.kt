@@ -10,13 +10,10 @@ import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.*
 import com.example.myapplication.Api.Model.IncidentesResponse
 import com.example.myapplication.Api.Model.UsuarioResponse
-import com.example.myapplication.BusquedaIncidentes
-import com.example.myapplication.BusquedaIncidentesDirections
 import com.example.myapplication.Entities.Incidente
-import com.example.myapplication.HomeIncidentsDirections
-import com.example.myapplication.R
 import com.google.gson.Gson
 import java.text.FieldPosition
 
@@ -57,6 +54,9 @@ class IncidenteHolder(v: View): RecyclerView.ViewHolder(v) {
                 action = BusquedaIncidentesDirections.actionBusquedaIncidentesToDescripIncidents(incidente)
                 actionResolutor = BusquedaIncidentesDirections.actionBusquedaIncidentesToDescripIncidentsResolutor(incidente)
 
+            } else if (view.findNavController().currentDestination?.id == R.id.historial) {
+                action = HistorialDirections.actionHistorialToDescripIncidents(incidente)
+                actionResolutor = HistorialDirections.actionHistorialToDescripIncidentsResolutor(incidente)
             } else {
                 action = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidents(incidente)
                 actionResolutor = HomeIncidentsDirections.actionHomeIncidentsToDescripIncidentesResolutor(incidente)
