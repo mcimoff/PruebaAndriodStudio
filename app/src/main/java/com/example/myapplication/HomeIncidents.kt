@@ -41,19 +41,20 @@ class HomeIncidents : Fragment() {
 
     lateinit var vistaHomeIncidentes : View
 
-    lateinit var btnHomeGoToIncidente1: Button
-    lateinit var btnHomeGoToIncidente2: Button
-    lateinit var receptorTV: TextView
+    lateinit var textoArea: TextView
     lateinit var providerTV: TextView
 
     lateinit var btnAlta: com.google.android.material.floatingactionbutton.FloatingActionButton
     lateinit var listIncidentes: RecyclerView
     lateinit var incidenteListAdapter: IncidenteListAdapter
     lateinit var  linearLayoutManager: LinearLayoutManager;
+
     val api = Model.create("http://192.168.0.134:3000")
 
+    lateinit var mainActivity : MainActivity
 
-
+    lateinit var idUsuario : String
+    lateinit var areaResolutora : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,11 +63,10 @@ class HomeIncidents : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+        mainActivity = (activity as MainActivity?)!!
 
-
-        /*val bundle: Bundle? = Intent.get
-
-        setup()*/
+        idUsuario = mainActivity.getUsuario()._id.toString()
+        areaResolutora = mainActivity.getUsuario().area.area
 
     }
 
@@ -78,6 +78,7 @@ class HomeIncidents : Fragment() {
         vistaHomeIncidentes = inflater.inflate(R.layout.home_incidents, container, false)
 
         //btnAlta = vistaHomeIncidentes.findViewById((R.id.btnGoToAlta))
+        textoArea = vistaHomeIncidentes.findViewById((R.id.textoArea))
         listIncidentes = vistaHomeIncidentes.findViewById((R.id.recicleViewIncidentes))
         listIncidentes.setHasFixedSize(true)
 
@@ -88,7 +89,7 @@ class HomeIncidents : Fragment() {
     override fun onStart() {
         super.onStart()
 
-
+        val mainActivity = (activity as MainActivity?)!!
 
         /*btnLogout.setOnClickListener {
 
@@ -99,68 +100,119 @@ class HomeIncidents : Fragment() {
 
         }*/
 
-
 //        btnAlta.setOnClickListener{
 //            var action6 = HomeIncidentsDirections.actionHomeIncidentsToAltaIncidents(altaID = "alta")
 //
 //            vistaHomeIncidentes.findNavController().navigate(action6)
 //        }
 
+        if (mainActivity.getUsuario().esResolutor) {
 
+//            areaResolutora = "SoporteAdministracion"
 
+            textoArea.text = ("Abiertos del Area: ${areaResolutora}")
 
-        api.getIncidentes()?.enqueue(object : Callback<List<IncidentesResponse>?>{
-               override fun onResponse(
-                   call: Call<List<IncidentesResponse>?>,
-                   response: Response<List<IncidentesResponse>?>
-               ){
-                   if (response.code() == 200){
-                       val response: List<IncidentesResponse>? =(response.body() as List<IncidentesResponse>)!!
+            api.getIncidentesXAreaAbiertos(areaResolutora)?.enqueue(object : Callback<List<IncidentesResponse>?>{
+                override fun onResponse(
+                    call: Call<List<IncidentesResponse>?>,
+                    response: Response<List<IncidentesResponse>?>
+                ){
+                    if (response.code() == 200){
+                        val response: List<IncidentesResponse>? =(response.body() as List<IncidentesResponse>)!!
+                        val incidentes = (response as List<IncidentesResponse>).toMutableList()
 
+                        Log.i(TAG, "Llego: $incidentes")
 
-                       val incidentes = (response as List<IncidentesResponse>).toMutableList()
-                       Log.i(TAG, "Llego: $incidentes")
+                        val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
 
+                        if(incidentes != null){
 
+                            linearLayoutManager = LinearLayoutManager(context)
 
+                            listIncidentes.layoutManager = linearLayoutManager
 
-                       val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
+                            incidenteListAdapter = IncidenteListAdapter(incidentes)
 
+                            listIncidentes.adapter = incidenteListAdapter
+                        }
+                    }
+                }
 
+                override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
+                    call.toString()
+                }
+            }
+            )
 
+        } else {
+//            idUsuario = "1044"
 
-                      if(incidentes != null){
+            api.getIncidentesAbiertosXID(idUsuario)?.enqueue(object : Callback<List<IncidentesResponse>?>{
+                override fun onResponse(
+                    call: Call<List<IncidentesResponse>?>,
+                    response: Response<List<IncidentesResponse>?>
+                ){
+                    if (response.code() == 200){
+                        val response: List<IncidentesResponse>? =(response.body() as List<IncidentesResponse>)!!
+                        val incidentes = (response as List<IncidentesResponse>).toMutableList()
 
-                          linearLayoutManager = LinearLayoutManager(context)
+                        Log.i(TAG, "Llego: $incidentes")
 
-                          listIncidentes.layoutManager = linearLayoutManager
+                        val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
 
-                          incidenteListAdapter = IncidenteListAdapter(incidentes)
+                        if(incidentes != null){
 
-                          listIncidentes.adapter = incidenteListAdapter
+                            linearLayoutManager = LinearLayoutManager(context)
 
+                            listIncidentes.layoutManager = linearLayoutManager
 
-                      }
+                            incidenteListAdapter = IncidenteListAdapter(incidentes)
 
-                   }
+                            listIncidentes.adapter = incidenteListAdapter
+                        }
+                    }
+                }
 
-               }
+                override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
+                    call.toString()
+                }
+            }
+            )
 
-               override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
-                   call.toString()
-               }
+        }
 
-
-
-           }
-           )
-
-
-
-
+//        api.getIncidentesAbiertos()?.enqueue(object : Callback<List<IncidentesResponse>?>{
+//               override fun onResponse(
+//                   call: Call<List<IncidentesResponse>?>,
+//                   response: Response<List<IncidentesResponse>?>
+//               ){
+//                   if (response.code() == 200){
+//                       val response: List<IncidentesResponse>? =(response.body() as List<IncidentesResponse>)!!
+//                       val incidentes = (response as List<IncidentesResponse>).toMutableList()
+//
+//                       Log.i(TAG, "Llego: $incidentes")
+//
+//                       val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
+//
+//                      if(incidentes != null){
+//
+//                          linearLayoutManager = LinearLayoutManager(context)
+//
+//                          listIncidentes.layoutManager = linearLayoutManager
+//
+//                          incidenteListAdapter = IncidenteListAdapter(incidentes)
+//
+//                          listIncidentes.adapter = incidenteListAdapter
+//                      }
+//                   }
+//               }
+//
+//               override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
+//                   call.toString()
+//               }
+//           }
+//           )
     }
-
-
 
     fun onItemClick (position: Int): Boolean{
         Snackbar.make(vistaHomeIncidentes,position.toString(),Snackbar.LENGTH_SHORT).show()

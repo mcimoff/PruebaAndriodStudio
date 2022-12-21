@@ -17,6 +17,27 @@ interface JsonApi {
     @GET
     suspend fun getIncidente(@Url url: String): Response<IncidentesResponse>
 
+    @GET("/incidentes/incidentesAbiertos")
+    fun getIncidentesAbiertos(): Call<List<IncidentesResponse>>
+
+    @GET("/incidentes/incidentesResueltos")
+    fun getIncidentesResueltos(): Call<List<IncidentesResponse>>
+
+    @GET("/incidentes/incidentesAbiertosXID/{id}")
+    fun getIncidentesAbiertosXID( @Path ("id")id: String): Call<List<IncidentesResponse>>
+
+    @GET("/incidentes/incidentesResueltosXID/{id}")
+    fun getIncidentesResueltosXID( @Path ("id")id: String): Call<List<IncidentesResponse>>
+
+    @GET("/incidentes/incidenteXAreaResolutora/{area}")
+    fun getIncidentesXArea( @Path ("area")area: String): Call<List<IncidentesResponse>>
+
+    @GET("/incidentes/incidenteXAreaResolutoraAbiertos/{area}")
+    fun getIncidentesXAreaAbiertos( @Path ("area")area: String): Call<List<IncidentesResponse>>
+
+    @GET("/incidentes/incidenteXAreaResolutoraResueltos/{area}")
+    fun getIncidentesXAreaResueltos( @Path ("area")area: String): Call<List<IncidentesResponse>>
+
     @GET("/usuarios/getusuario/{email}")
     fun getUsuarioXEmail( @Path ("email")email: String): Call<UsuarioResponse?>
 
