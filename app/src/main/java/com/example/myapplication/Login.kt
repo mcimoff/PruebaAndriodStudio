@@ -6,12 +6,15 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.compose.animation.animateColorAsState
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -48,6 +51,8 @@ class Login : Fragment() {
     lateinit var btnRegistrarse: Button
     lateinit var idEmail: EditText
     lateinit var idPassword : EditText
+    lateinit var validacionPassword : TextView
+    lateinit var validacionEmail : TextView
     val api = Model.create("http://192.168.0.134:3000")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -122,6 +127,41 @@ class Login : Fragment() {
         idEmail = vistaFragment.findViewById((R.id.idEmailText))
         idPassword = vistaFragment.findViewById(R.id.idPasswordText)
 
+        validacionEmail = vistaFragment.findViewById((R.id.validacionEmailTV))
+        validacionPassword = vistaFragment.findViewById((R.id.validacionPasswordTV))
+
+
+        idEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                validacionEmail.text = ""
+                validacionEmail.visibility = View.INVISIBLE
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val email = s.toString()
+                validateEmail(email, validacionEmail)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val password = s.toString()
+            }
+        })
+
+
+        idPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                validacionPassword.text = ""
+                validacionPassword.visibility = View.INVISIBLE
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val password = s.toString()
+                validatePassword(password, validacionPassword)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val password = s.toString()
+            }
+        })
+
         setup()
 
         return vistaFragment
@@ -190,10 +230,34 @@ class Login : Fragment() {
     private fun showAlert() {
         val builder = (activity as ActivityLogin?)!!.getBuilder()
         builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error autenticando al usuario")
+        builder.setMessage("Email o contraseña incorrectos.")
         builder.setPositiveButton("Aceptar", null)
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    fun validatePassword(password: String, errorTextView: TextView) {
+        if (password.length < 6) {
+            errorTextView.text = "La contraseña debe ser mayor o igual a 6 carácteres."
+            errorTextView.visibility = View.VISIBLE
+        } else {
+            errorTextView.text = ""
+            errorTextView.visibility = View.GONE
+        }
+
+//        if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"))) {
+//            return "Password must contain at least one lowercase letter, one uppercase letter, and one digit"
+//        }
+    }
+
+    fun validateEmail(email: String, errorTextView: TextView) {
+        if (!email.contains("@")) {
+            errorTextView.text = "El formato del email es incorrecto."
+            errorTextView.visibility = View.VISIBLE
+        } else {
+            errorTextView.text = ""
+            errorTextView.visibility = View.GONE
+        }
     }
 }

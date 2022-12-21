@@ -78,7 +78,14 @@
         android:id="@+id/historial"
         android:name="com.example.myapplication.Historial"
         android:label="fragment_historial"
-        tools:layout="@layout/fragment_historial" />
+        tools:layout="@layout/fragment_historial">
+        <action
+            android:id="@+id/action_historial_to_descrip_incidents"
+            app:destination="@id/descrip_incidents" />
+        <action
+            android:id="@+id/action_historial_to_descrip_incidents_resolutor"
+            app:destination="@id/descripIncidentesResolutor" />
+    </fragment>
     <fragment
         android:id="@+id/perfil"
         android:name="com.example.myapplication.Perfil"

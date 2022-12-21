@@ -21,7 +21,6 @@ data class IncidentesResponse(
          parcel.readString().toString(),
          parcel.readParcelable(AfectadoResponse::class.java.classLoader)
 
-
      ) {
      }
 

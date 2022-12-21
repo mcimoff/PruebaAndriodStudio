@@ -6,15 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".Historial">
 
-    <TextView
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:text="Historial"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Spinner
+        android:id="@+id/estados_incidentes_spinner"
+        android:layout_width="245dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:dropDownWidth="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <RadioGroup-->
+<!--        android:layout_width="245dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_abiertos"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Abiertos" />-->
+
+<!--        <Space-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1" />-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_resueltos"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Resueltos" />-->
+<!--    </RadioGroup>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleBusqueda"
+        android:layout_width="409dp"
+        android:layout_height="520dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" /><!-- set query string of an search view -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
