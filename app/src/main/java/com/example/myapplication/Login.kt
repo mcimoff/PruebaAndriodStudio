@@ -24,7 +24,10 @@ import com.example.myapplication.Api.Model.Model
 import com.example.myapplication.Api.Model.UsuarioResponse
 import com.example.myapplication.adapters.IncidenteListAdapter
 import com.example.myapplication.fragments.AjustesDirections
+import com.google.android.gms.auth.GoogleAuthUtil.getToken
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -138,7 +141,7 @@ class Login : Fragment() {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val email = s.toString()
-                validateEmail(email, validacionEmail)
+                activityLogin.validateEmail(email, validacionEmail)
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -175,8 +178,13 @@ class Login : Fragment() {
                 signInWithEmailAndPassword(idEmail.text.toString(), idPassword.text.toString()).
                 addOnCompleteListener {
                     if (it.isSuccessful) {
-
                         Log.d(TAG, "signInWithEmail:success")
+
+//                        FirebaseAuth.getInstance().getAccessToken(true)
+//                        FirebaseAuth.getInstance().currentUser?.getIdToken(true)
+//                        FirebaseUser.getToken()
+//                        Firebase.auth().currentUser.getIdToken()
+
                         api.getUsuarioXEmail(it.result?.user?.email ?:"")?.enqueue(object : Callback<UsuarioResponse?> {
                             override fun onResponse(
                                 call: Call<UsuarioResponse?>,
@@ -251,13 +259,13 @@ class Login : Fragment() {
 //        }
     }
 
-    fun validateEmail(email: String, errorTextView: TextView) {
-        if (!email.contains("@")) {
-            errorTextView.text = "El formato del email es incorrecto."
-            errorTextView.visibility = View.VISIBLE
-        } else {
-            errorTextView.text = ""
-            errorTextView.visibility = View.GONE
-        }
-    }
+//    fun validateEmail(email: String, errorTextView: TextView) {
+//        if (!email.contains("@")) {
+//            errorTextView.text = "El formato del email es incorrecto."
+//            errorTextView.visibility = View.VISIBLE
+//        } else {
+//            errorTextView.text = ""
+//            errorTextView.visibility = View.GONE
+//        }
+//    }
 }

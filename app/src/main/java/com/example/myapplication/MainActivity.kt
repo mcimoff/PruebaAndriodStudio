@@ -45,17 +45,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        Firebase.database.setPersistenceEnabled(true)
-
-//        FirebaseAuth.getInstance().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-//        FirebaseAuth.getInstance().setPersistenceEnabled(true)
-//        FirebaseAuth.getInstance().setPersistenceEnabled(true)
-//
-//        Firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-//
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-
-
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
@@ -87,11 +76,6 @@ class MainActivity : AppCompatActivity() {
         
         //val bottomNav = findViewById<BottomNavigationView>(id.bottomNavigationView)
     }
-
-//    fun getDatosUsuario(): String? {
-//        val bundle: Bundle? = intent.extras
-//        return bundle?.getString("usuario")
-//    }
 
     fun getEmail(): String? {
         val bundle: Bundle? = intent.extras

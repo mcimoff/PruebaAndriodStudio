@@ -108,7 +108,7 @@ class HomeIncidents : Fragment() {
 
         if (mainActivity.getUsuario().esResolutor) {
 
-//            areaResolutora = "SoporteAdministracion"
+            areaResolutora = "SoporteAdministracion"
 
             textoArea.text = ("Abiertos del Area: ${areaResolutora}")
 
@@ -145,7 +145,7 @@ class HomeIncidents : Fragment() {
             )
 
         } else {
-//            idUsuario = "1044"
+            idUsuario = "1044"
 
             api.getIncidentesAbiertosXID(idUsuario)?.enqueue(object : Callback<List<IncidentesResponse>?>{
                 override fun onResponse(
@@ -180,38 +180,6 @@ class HomeIncidents : Fragment() {
             )
 
         }
-
-//        api.getIncidentesAbiertos()?.enqueue(object : Callback<List<IncidentesResponse>?>{
-//               override fun onResponse(
-//                   call: Call<List<IncidentesResponse>?>,
-//                   response: Response<List<IncidentesResponse>?>
-//               ){
-//                   if (response.code() == 200){
-//                       val response: List<IncidentesResponse>? =(response.body() as List<IncidentesResponse>)!!
-//                       val incidentes = (response as List<IncidentesResponse>).toMutableList()
-//
-//                       Log.i(TAG, "Llego: $incidentes")
-//
-//                       val titulos = arrayOfNulls<IncidentesResponse>(size = incidentes?.size ?:0)
-//
-//                      if(incidentes != null){
-//
-//                          linearLayoutManager = LinearLayoutManager(context)
-//
-//                          listIncidentes.layoutManager = linearLayoutManager
-//
-//                          incidenteListAdapter = IncidenteListAdapter(incidentes)
-//
-//                          listIncidentes.adapter = incidenteListAdapter
-//                      }
-//                   }
-//               }
-//
-//               override fun onFailure(call: Call<List<IncidentesResponse>?>, t: Throwable) {
-//                   call.toString()
-//               }
-//           }
-//           )
     }
 
     fun onItemClick (position: Int): Boolean{

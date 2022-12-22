@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Api.Model.UsuarioResponse
 import com.example.myapplication.activities.MainResolutorActivity
@@ -46,6 +48,16 @@ class ActivityLogin : AppCompatActivity() {
 
     fun getSharedPreferencesFromActivity(): SharedPreferences {
         return getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+    }
+
+    fun validateEmail(email: String, errorTextView: TextView) {
+        if (!email.contains("@")) {
+            errorTextView.text = "El formato del email es incorrecto."
+            errorTextView.visibility = View.VISIBLE
+        } else {
+            errorTextView.text = ""
+            errorTextView.visibility = View.GONE
+        }
     }
 
     fun startFirebaseAnalyticsInstance() {

@@ -1,5 +1,6 @@
 package com.example.myapplication.activities
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,9 +12,11 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.example.myapplication.Api.Model.UsuarioResponse
 import com.example.myapplication.R
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
 
 class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener,
     Preference.SummaryProvider<ListPreference> {
@@ -36,8 +39,9 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
         val resetPasswordString = "resetPasswordPreference"
         //val resetEmailString = "resetEmailPreference"
 
-        val bundle: Bundle? = intent.extras
-        val email = bundle?.getString("email")
+        val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+        val usuario = getObject(preferences, "USUARIO_KEY", UsuarioResponse::class.java) as UsuarioResponse
+        val email = usuario.email
 
         key?.let {
             when (it) {
@@ -50,7 +54,7 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
                     }
                 }
                 resetPasswordString -> sharedPreferences?.let {
-                    FirebaseAuth.getInstance().sendPasswordResetEmail(email!!)
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 Toast.makeText(
@@ -140,5 +144,11 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
     override fun provideSummary(preference: ListPreference): CharSequence? {
         return if (preference?.key == getString(R.string.dark_mode)) preference.entry
         else "Unknown Preference"
+    }
+
+    fun getObject(preferences: SharedPreferences, key: String, clazz: Class<*>): Any? {
+        val gson = Gson()
+        val json = preferences.getString(key, null)
+        return gson.fromJson(json, clazz)
     }
 }

@@ -106,8 +106,8 @@ class Historial : Fragment() {
     override fun onStart() {
         super.onStart()
 
-//        idUsuario = "1044"
-//        areaResolutora = "SoporteAdministracion"
+        idUsuario = "1044"
+        areaResolutora = "SoporteAdministracion"
 
         val esResolutor = mainActivity.getUsuario().esResolutor
 
