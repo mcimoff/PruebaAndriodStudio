@@ -47,6 +47,21 @@ class ResetPassword : Fragment() {
         btnGoToLogin = vistaFragmentResetPassword.findViewById((R.id.buttonVolverToLogin))
         btnSubmit = vistaFragmentResetPassword.findViewById((R.id.btn_submit))
 
+//        idEmail.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                validacionEmail.text = ""
+//                validacionEmail.visibility = View.INVISIBLE
+//            }
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                val email = s.toString()
+//                activityLogin.validateEmail(email, validacionEmail)
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                val password = s.toString()
+//            }
+//        })
+
         return vistaFragmentResetPassword;
     }
 
@@ -71,7 +86,10 @@ class ResetPassword : Fragment() {
                                 Toast.LENGTH_LONG
                             ).show()
 
-                            activity?.finish()
+                            var action = ResetPasswordDirections.actionResetPasswordToLogin(indexID = "index")
+
+                            vistaFragmentResetPassword.findNavController().navigate(action)
+
                         } else {
                             Toast.makeText(
                                 activity,

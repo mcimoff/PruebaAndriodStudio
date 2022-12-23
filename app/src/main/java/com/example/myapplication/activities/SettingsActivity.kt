@@ -1,5 +1,6 @@
 package com.example.myapplication.activities
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,9 +12,11 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.example.myapplication.Api.Model.UsuarioResponse
 import com.example.myapplication.R
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
 
 class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener,
     Preference.SummaryProvider<ListPreference> {
@@ -36,8 +39,9 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
         val resetPasswordString = "resetPasswordPreference"
         //val resetEmailString = "resetEmailPreference"
 
-        val bundle: Bundle? = intent.extras
-        val email = bundle?.getString("email")
+        val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+        val usuario = getObject(preferences, "USUARIO_KEY", UsuarioResponse::class.java) as UsuarioResponse
+        val email = usuario.email
 
         key?.let {
             when (it) {
@@ -50,7 +54,7 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
                     }
                 }
                 resetPasswordString -> sharedPreferences?.let {
-                    FirebaseAuth.getInstance().sendPasswordResetEmail(email!!)
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 Toast.makeText(
@@ -101,23 +105,6 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.user_preferences, rootKey)
         }
-
-//        // Save the user's ID and email using SharedPreferences
-//        fun saveUser(authResult: AuthResult) {
-//            val sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE)
-//            val editor = sharedPreferences.edit()
-//            editor.putString(USER_ID_KEY, authResult.user.uid)
-//            editor.putString(USER_EMAIL_KEY, authResult.user.email)
-//            editor.apply()
-//        }
-//
-//        // Check if the user is already logged in
-//        fun isUserLoggedIn(): Boolean {
-//            val sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE)
-//            val userId = sharedPreferences.getString(USER_ID_KEY, null)
-//            val userEmail = sharedPreferences.getString(USER_EMAIL_KEY, null)
-//            return userId != null && userEmail != null
-//        }
     }
 
 //    override fun onDestroy() {
@@ -136,9 +123,14 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
         return super.onContextItemSelected(item)
     }
 
-
     override fun provideSummary(preference: ListPreference): CharSequence? {
         return if (preference?.key == getString(R.string.dark_mode)) preference.entry
         else "Unknown Preference"
+    }
+
+    fun getObject(preferences: SharedPreferences, key: String, clazz: Class<*>): Any? {
+        val gson = Gson()
+        val json = preferences.getString(key, null)
+        return gson.fromJson(json, clazz)
     }
 }

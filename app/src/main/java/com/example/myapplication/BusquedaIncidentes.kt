@@ -34,7 +34,7 @@ class BusquedaIncidentes : Fragment(), SearchView.OnQueryTextListener {
 
     lateinit var vistaBusqueda : View
     lateinit var btnBusqueda : SearchView
-    val apiBusqueda = Model.create("http://192.168.0.13:3000/incidentes/incidenteXID/")
+    val apiBusqueda = Model.create("http://192.168.0.134:3000/incidentes/incidenteXID/")
     lateinit var recycleBusqueda : RecyclerView
     private val incidentelist = mutableListOf<IncidentesResponse>()
     var incidents : MutableList<IncidentesResponse> = mutableListOf()
